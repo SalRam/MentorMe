@@ -29,6 +29,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,6 +68,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // ** Needed for Fabric **//
+        Fabric.with(this, new Crashlytics());
+
         setContentView(R.layout.login);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
