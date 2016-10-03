@@ -1,63 +1,61 @@
 package mentorme.csumb.edu.mentorme.login;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.OptionalPendingResult;
+
+import rx.Observable;
+import rx.functions.Func0;
+
 
 /**
  * Created by benitosanchez on 9/29/16.
  */
 public class LoginController
-        implements GoogleApiClient.OnConnectionFailedListener,
-        LoginModel.GoogleLoginListener {
+        implements GoogleApiClient.OnConnectionFailedListener {
 
     private static final int RC_SIGN_IN = 9001;
 
     private LoginModel mLoginModel;
-    private LoginModel.GoogleLoginListener mGoogleLoginListener;
-    private LoginControllerListener mListener;
-    private ProgressDialog mProgressDialog;
-    private Context mContext;
 
     private final String TAG = "LoginController";
 
-    public LoginController(Context context, LoginControllerListener controllerListener) {
-        mLoginModel = new LoginModel(this);
-        mListener = controllerListener;
+    public LoginController() {
+        mLoginModel = new LoginModel();
     }
 
-    public void sigInResult(int requestCode, Intent data) {
+    public Observable<GoogleSignInResult> sigInResult(int requestCode, Intent data) {
         if (requestCode == RC_SIGN_IN) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            handleResult(result);
+            final GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+
+            return Observable.defer(new Func0<Observable<GoogleSignInResult>>() {
+                @Override
+                public Observable<GoogleSignInResult> call() {
+                    return Observable.just(result);
+                }
+            });
         }
+        return null;
     }
 
-    public void  initialSignIn(GoogleApiClient googleApiClient) {
-        mLoginModel.startSignIn(googleApiClient);
-    }
+    public Observable<GoogleSignInResult> initialSignIn(GoogleApiClient googleApiClient) {
+        final OptionalPendingResult<GoogleSignInResult> opr = mLoginModel.startSignIn(googleApiClient);
 
-    private void handleResult(GoogleSignInResult result) {
-        if (result.isSuccess()) {
-            mListener.onGoogleSignInResultCompleted(result);
-        } else {
-            mListener.onGoogleSignInResultFail();
-        }
-    }
+        Log.d(TAG, "Got cached sign-in");
+        return Observable.defer(new Func0<Observable<GoogleSignInResult>>() {
+            @Override
+            public Observable<GoogleSignInResult> call() {
+                return Observable.just(opr.get());
+            }
+        });
 
-    @Override
-    public void onGoogleSignInResultCompleted(GoogleSignInResult result) {
-        mListener.onGoogleSignInResultCompleted(result);
     }
 
     public GoogleApiClient getGoogleApiClient(AppCompatActivity activity) {
@@ -69,8 +67,4 @@ public class LoginController
         Log.d(TAG, "onConnectionFailed: " + connectionResult);
     }
 
-    public interface LoginControllerListener {
-        void onGoogleSignInResultCompleted(GoogleSignInResult result);
-        void onGoogleSignInResultFail();
-    }
 }
