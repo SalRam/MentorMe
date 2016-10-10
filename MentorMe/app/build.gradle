@@ -38,7 +38,10 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    // Junit
     testCompile 'junit:junit:4.12'
+    // Robolectric
+    testCompile 'org.robolectric:robolectric:3.1.2'
 
     // Butter Knife
     apt 'com.jakewharton:butterknife-compiler:8.0.1'
