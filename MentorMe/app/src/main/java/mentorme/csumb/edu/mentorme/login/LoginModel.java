@@ -19,8 +19,7 @@ public class LoginModel {
     public OptionalPendingResult<GoogleSignInResult> startSignIn(GoogleApiClient mGoogleApiClient) {
         OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
 
-            return opr;
-
+        return opr;
     }
 }
 

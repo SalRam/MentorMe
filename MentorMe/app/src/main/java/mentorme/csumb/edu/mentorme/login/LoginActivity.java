@@ -30,17 +30,12 @@ import rx.schedulers.Schedulers;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends MentorMeActivity {
-    @BindView(R.id.loading_sign_in) ProgressBar mProgressBar;
-    @BindView(R.id.login_button) Button mLoginButton;
 
-    @VisibleForTesting
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
 
     private GoogleApiClient mGoogleApiClient;
     private LoginController mLoginController;
-    private ProgressDialog mProgressDialog;
-    private Subscription subscription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +44,8 @@ public class LoginActivity extends MentorMeActivity {
         // ** Needed for Fabric **//
         Fabric.with(this, new Crashlytics());
 
-        setContentView(R.layout.login);
-
-        mLoginController = new LoginController();
-
-        mGoogleApiClient = super.getGoogleApiClient();
-
+        mGoogleApiClient = getGoogleApiClient();
+        mLoginController = new LoginController(this);
         ButterKnife.bind(this);
     }
 
@@ -62,95 +53,14 @@ public class LoginActivity extends MentorMeActivity {
     public void onStart() {
         super.onStart();
 
-        showProgressDialog();
-
-        subscription = mLoginController.initialSignIn(mGoogleApiClient)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<GoogleSignInResult>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        hideProgressDialog();
-                        Log.d(TAG, e.getMessage());
-                        Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onNext(GoogleSignInResult result) {
-                        hideProgressDialog();
-                        Toast.makeText(
-                                getApplicationContext(),
-                                result.getSignInAccount().getEmail(),
-                                Toast.LENGTH_SHORT).show();
-
-                    }
-                });
+        mLoginController.initialSubscriber(mGoogleApiClient);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        mLoginController.sigInResult(requestCode, data)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<GoogleSignInResult>() {
-                    @Override
-                    public void onCompleted() { }
+        mLoginController.onActivityResult(requestCode, resultCode, data);
 
-                    @Override
-                    public void onError(Throwable e) {
-                        hideProgressDialog();
-                        Log.d(TAG, e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(GoogleSignInResult result) {
-                        hideProgressDialog();
-                        Toast.makeText(getApplicationContext(),
-                                result.getSignInAccount().getEmail(),
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-    }
-
-    private void singIn() {
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-
-    private void hideProgressDialog() {
-        if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            mProgressDialog.hide();
-        }
-    }
-
-    private void showProgressDialog() {
-        if (mProgressDialog == null) {
-            mProgressDialog = new ProgressDialog(LoginActivity.this);
-            mProgressDialog.setMessage("Loading");
-        }
-        mProgressDialog.show();
-    }
-
-    @OnClick(R.id.login_button)
-    public void onLoginButtonClicked() {
-        singIn();
-        showProgressDialog();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        if (subscription != null && subscription.isUnsubscribed()) {
-            subscription.unsubscribe();
-        }
 
     }
 }

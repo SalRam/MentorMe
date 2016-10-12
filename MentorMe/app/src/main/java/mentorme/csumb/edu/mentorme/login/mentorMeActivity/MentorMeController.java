@@ -14,8 +14,9 @@ public class MentorMeController implements GoogleApiClient.OnConnectionFailedLis
 
     private final String TAG = "MentorMeController";
     private GoogleApiSignInModel googleApiSignInModel;
+    private GoogleApiClient mGoogleApiClient;
 
-    MentorMeController() {
+    public MentorMeController() {
         googleApiSignInModel = GoogleApiSignInModel.getInstance();
     }
 
@@ -27,7 +28,12 @@ public class MentorMeController implements GoogleApiClient.OnConnectionFailedLis
      */
     public GoogleApiClient getGoogleApiClient(AppCompatActivity activity) {
 
-        return googleApiSignInModel.getGoogleApiClient(activity, this);
+        mGoogleApiClient =  googleApiSignInModel.getGoogleApiClient(activity, this);
+        return mGoogleApiClient;
+    }
+
+    public GoogleApiClient getmGoogleApiClient() {
+        return mGoogleApiClient;
     }
 
     @Override
