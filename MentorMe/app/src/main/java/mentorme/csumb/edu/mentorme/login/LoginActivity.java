@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.fabric.sdk.android.Fabric;
 import mentorme.csumb.edu.mentorme.R;
+import mentorme.csumb.edu.mentorme.login.mentorMeActivity.MentorMeActivity;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -28,7 +29,7 @@ import rx.schedulers.Schedulers;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends MentorMeActivity {
     @BindView(R.id.loading_sign_in) ProgressBar mProgressBar;
     @BindView(R.id.login_button) Button mLoginButton;
 
@@ -38,10 +39,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private GoogleApiClient mGoogleApiClient;
     private LoginController mLoginController;
-
     private ProgressDialog mProgressDialog;
-
     private Subscription subscription;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
 
         mLoginController = new LoginController();
 
-        mGoogleApiClient = mLoginController.getGoogleApiClient(this);
+        mGoogleApiClient = super.getGoogleApiClient();
 
         ButterKnife.bind(this);
     }

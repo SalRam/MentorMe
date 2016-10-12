@@ -11,6 +11,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 
+import mentorme.csumb.edu.mentorme.login.mentorMeActivity.GoogleApiSignInModel;
 import rx.Observable;
 import rx.functions.Func0;
 
@@ -18,8 +19,7 @@ import rx.functions.Func0;
 /**
  * Created by benitosanchez on 9/29/16.
  */
-public class LoginController
-        implements GoogleApiClient.OnConnectionFailedListener {
+public class LoginController {
 
     private static final int RC_SIGN_IN = 9001;
 
@@ -56,15 +56,6 @@ public class LoginController
             }
         });
 
-    }
-
-    public GoogleApiClient getGoogleApiClient(AppCompatActivity activity) {
-        return mLoginModel.getGoogleApiClient(activity, this);
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Log.d(TAG, "onConnectionFailed: " + connectionResult);
     }
 
 }

@@ -13,23 +13,8 @@ import com.google.android.gms.common.api.OptionalPendingResult;
  */
 public class LoginModel {
     private static final String TAG = "LoginModel";
-    private GoogleSignInOptions gso;
 
-    LoginModel() {
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-
-    }
-
-    public GoogleApiClient getGoogleApiClient(
-            AppCompatActivity activity,
-            GoogleApiClient.OnConnectionFailedListener listener) {
-        return new GoogleApiClient.Builder(activity)
-                .enableAutoManage(activity, listener)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-    }
+    LoginModel() { }
 
     public OptionalPendingResult<GoogleSignInResult> startSignIn(GoogleApiClient mGoogleApiClient) {
         OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
