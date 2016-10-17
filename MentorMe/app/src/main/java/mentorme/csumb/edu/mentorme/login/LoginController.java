@@ -11,6 +11,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
+import com.google.android.gms.common.api.ResultCallback;
 
 import mentorme.csumb.edu.mentorme.login.mentorMeActivity.GoogleApiSignInModel;
 import rx.Observable;
@@ -25,13 +26,11 @@ import rx.schedulers.Schedulers;
  */
 public class LoginController implements LoginLayout.Listener {
 
-    private LoginLayout mLoginLayout;
-
     private static final int RC_SIGN_IN = 9001;
-
-    private LoginModel mLoginModel;
-
     private final String TAG = "LoginController";
+
+    private LoginLayout mLoginLayout;
+    private LoginModel mLoginModel;
 
     private GoogleApiClient mGoogleApiClient;
 
@@ -45,59 +44,63 @@ public class LoginController implements LoginLayout.Listener {
     }
 
     /**
+     * Creates Observable with Sign in data
+     */
+    public void initialSignIn(GoogleApiClient googleApiClient) {
+
+        OptionalPendingResult<GoogleSignInResult> opr = mLoginModel.startSignIn(googleApiClient);
+
+        if (opr.isDone()) {
+            Log.d(TAG, "Got cached sign-in");
+            GoogleSignInResult result = opr.get();
+            handleSignInResult(result);
+        } else {
+            opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
+                @Override
+                public void onResult(@NonNull GoogleSignInResult result) {
+                    mLoginLayout.showProgressDialog();
+                    handleSignInResult(result);
+                }
+            });
+        }
+    }
+
+    public void handleSignInResult(GoogleSignInResult result) {
+        Toast.makeText(mActivity.getApplicationContext(), result.getSignInAccount().getEmail(), Toast.LENGTH_SHORT).show();
+        mLoginLayout.hideProgressDialog();
+    }
+
+    /**
      * Converts sign in results into an Observable
+     *
      * @param requestCode expected for the result
      * @param data intent with sign-in information
      * @return signInResult as an observable
      */
-    public Observable<GoogleSignInResult> sigInResult(int requestCode, Intent data) {
+    public void sigInResult(int requestCode, Intent data) {
+
         if (requestCode == RC_SIGN_IN) {
             final GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            Log.d(TAG, result.toString());
 
-            return Observable.defer(new Func0<Observable<GoogleSignInResult>>() {
-                @Override
-                public Observable<GoogleSignInResult> call() {
-                    return Observable.just(result);
-                }
-            });
+            handleSignInResult(result);
         }
-        return null;
     }
 
     /**
      * Makes a request a GoogleApiClient and sends result to LoginLayout
      */
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, Intent data) {
 
-        sigInResult(requestCode, data)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(mLoginLayout);
+        sigInResult(requestCode, data);
     }
-    /**
-     * Creates Observable with Sign in data
-     */
-    public Observable<GoogleSignInResult> initialSignIn(GoogleApiClient googleApiClient) {
 
-        final OptionalPendingResult<GoogleSignInResult> opr = mLoginModel.startSignIn(googleApiClient);
-
-        Log.d(TAG, "Got cached sign-in");
-        return Observable.defer(new Func0<Observable<GoogleSignInResult>>() {
-            @Override
-            public Observable<GoogleSignInResult> call() {
-                return Observable.just(opr.get());
-            }
-        });
-    }
     /**
      *  makes a request to see if the user is already signed in(Api client is signed up)
      */
     public void initialSubscriber(GoogleApiClient googleApiClient){
         mGoogleApiClient = googleApiClient;
-        initialSignIn(googleApiClient)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(mLoginLayout);
+        initialSignIn(googleApiClient);
     }
 
     @Override

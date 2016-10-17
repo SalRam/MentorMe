@@ -1,19 +1,14 @@
 package mentorme.csumb.edu.mentorme.login;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -65,13 +60,13 @@ public class LoginLayout extends Subscriber<GoogleSignInResult>{
                 Toast.LENGTH_SHORT).show();
     }
 
-    private void hideProgressDialog() {
+    public void hideProgressDialog() {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.hide();
         }
     }
 
-    public void showPogressDialog(){
+    public void showProgressDialog(){
         if (mProgressDialog == null){
             mProgressDialog = new ProgressDialog(mActivity);
             mProgressDialog.setMessage("Loading");
@@ -81,13 +76,12 @@ public class LoginLayout extends Subscriber<GoogleSignInResult>{
 
     @OnClick(R.id.login_button)
     public void onLoginButtonClicked() {
-        showPogressDialog();
+        showProgressDialog();
         listener.onLoginButtonClick();
 
     }
 
     public interface Listener{
-
-        public void onLoginButtonClick();
+        void onLoginButtonClick();
     }
 }

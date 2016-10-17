@@ -32,10 +32,6 @@ public class MentorMeController implements GoogleApiClient.OnConnectionFailedLis
         return mGoogleApiClient;
     }
 
-    public GoogleApiClient getmGoogleApiClient() {
-        return mGoogleApiClient;
-    }
-
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Log.d(TAG, "onConnectionFailed: " + connectionResult);
