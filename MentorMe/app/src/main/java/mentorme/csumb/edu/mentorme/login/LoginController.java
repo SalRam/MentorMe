@@ -55,10 +55,10 @@ public class LoginController implements LoginLayout.Listener {
             GoogleSignInResult result = opr.get();
             handleSignInResult(result);
         } else {
+            mLoginLayout.showProgressDialog();
             opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
                 @Override
                 public void onResult(@NonNull GoogleSignInResult result) {
-                    mLoginLayout.showProgressDialog();
                     handleSignInResult(result);
                 }
             });
@@ -66,8 +66,11 @@ public class LoginController implements LoginLayout.Listener {
     }
 
     public void handleSignInResult(GoogleSignInResult result) {
-        Toast.makeText(mActivity.getApplicationContext(), result.getSignInAccount().getEmail(), Toast.LENGTH_SHORT).show();
         mLoginLayout.hideProgressDialog();
+        if (result.isSuccess()) {
+            Toast.makeText(mActivity.getApplicationContext(), result.getSignInAccount().getEmail(), Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     /**
