@@ -1,30 +1,14 @@
 package mentorme.csumb.edu.mentorme.login;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.fabric.sdk.android.Fabric;
-import mentorme.csumb.edu.mentorme.R;
 import mentorme.csumb.edu.mentorme.login.mentorMeActivity.MentorMeActivity;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * A login screen that offers login via email/password.
@@ -60,8 +44,6 @@ public class LoginActivity extends MentorMeActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mLoginController.onActivityResult(requestCode, data);
-
-
     }
 }
 

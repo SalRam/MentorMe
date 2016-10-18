@@ -1,5 +1,7 @@
 package mentorme.csumb.edu.mentorme.login;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -8,17 +10,14 @@ import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 
-import mentorme.csumb.edu.mentorme.login.mentorMeActivity.GoogleApiSignInModel;
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func0;
-import rx.schedulers.Schedulers;
+import java.util.regex.Pattern;
+
+import mentorme.csumb.edu.mentorme.login.homeScreen.HomeActivity;
 
 
 /**
@@ -31,12 +30,10 @@ public class LoginController implements LoginLayout.Listener {
 
     private LoginLayout mLoginLayout;
     private LoginModel mLoginModel;
-
     private GoogleApiClient mGoogleApiClient;
+    private AppCompatActivity mActivity;
 
-    AppCompatActivity mActivity;
-
-    public LoginController(AppCompatActivity activity) {
+    public LoginController(@NonNull AppCompatActivity activity) {
 
         mActivity = activity;
         mLoginModel = new LoginModel();
@@ -46,7 +43,7 @@ public class LoginController implements LoginLayout.Listener {
     /**
      * Creates Observable with Sign in data
      */
-    public void initialSignIn(GoogleApiClient googleApiClient) {
+    public void initialSignIn(@NonNull GoogleApiClient googleApiClient) {
 
         OptionalPendingResult<GoogleSignInResult> opr = mLoginModel.startSignIn(googleApiClient);
 
@@ -65,12 +62,47 @@ public class LoginController implements LoginLayout.Listener {
         }
     }
 
-    public void handleSignInResult(GoogleSignInResult result) {
+    private void handleSignInResult(@NonNull GoogleSignInResult result) {
         mLoginLayout.hideProgressDialog();
         if (result.isSuccess()) {
-            Toast.makeText(mActivity.getApplicationContext(), result.getSignInAccount().getEmail(), Toast.LENGTH_SHORT).show();
-        }
+            if (isEmailValid(result.getSignInAccount().getEmail())) {
+                Log.d(TAG, "EMAIL IS VALID");
+                startHomeActivity();
+            }
+            else if (result.getSignInAccount() != null) {
+                Log.d(TAG, "EMAIL IS NOT VALID");
 
+                AlertDialog alertDialog = new AlertDialog.Builder(mActivity).create();
+                alertDialog.setTitle("Invalid Account");
+                alertDialog.setMessage("Please log in with CSUMB account");
+                alertDialog.setCanceledOnTouchOutside(false);
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                revokeAccess();
+                            }
+                        });
+                alertDialog.show();
+            }
+        }
+    }
+
+    private void revokeAccess() {
+        Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
+            @Override
+            public void onResult(@NonNull Status status) {
+
+            }
+        });
+    }
+    private boolean isEmailValid(String email) {
+        return email.endsWith("@csumb.edu");
+    }
+
+    private void startHomeActivity() {
+        Intent intent = new Intent(mActivity, HomeActivity.class);
+        mActivity.startActivity(intent);
     }
 
     /**
@@ -80,7 +112,7 @@ public class LoginController implements LoginLayout.Listener {
      * @param data intent with sign-in information
      * @return signInResult as an observable
      */
-    public void sigInResult(int requestCode, Intent data) {
+    public void sigInResult(@NonNull int requestCode, @NonNull Intent data) {
 
         if (requestCode == RC_SIGN_IN) {
             final GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);

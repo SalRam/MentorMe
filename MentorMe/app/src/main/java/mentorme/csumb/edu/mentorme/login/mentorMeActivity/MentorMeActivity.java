@@ -3,10 +3,7 @@ package mentorme.csumb.edu.mentorme.login.mentorMeActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.OptionalPendingResult;
 
 /**
  * MentorMeActivity will be a super activity that initializes default set up for each activity.
