@@ -1,0 +1,10 @@
+test:
+   override:
+     - (./gradlew assemble):
+   post:
+       - mkdir -p $CIRCLE_TEST_REPORTS/reports/
+       - cp ./*/*-reports/*.xml $CIRCLE_TEST_REPORTS/reports/
+       
+notify:
+  webhooks:
+    - url: http://csumbse.net/harbormaster/hook/circleci/
