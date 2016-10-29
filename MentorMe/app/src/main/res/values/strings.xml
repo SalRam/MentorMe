@@ -14,4 +14,7 @@
         completions."
     </string>
     <string name="title_activity_home"></string>
+
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>
