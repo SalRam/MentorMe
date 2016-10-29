@@ -2,9 +2,17 @@ package mentorme.csumb.edu.mentorme.login.homeScreen;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ListAdapter;
 import android.widget.SimpleAdapter;
 
@@ -32,6 +40,7 @@ public class HomeActivity extends ListActivity {
         setContentView(R.layout.activity_home);
 
         new GetSubjects().execute();
+
     }
 
     private class GetSubjects extends AsyncTask<Void, Void, Void> {
@@ -112,7 +121,6 @@ public class HomeActivity extends ListActivity {
             }
         }
     }
-
 }
 
 
