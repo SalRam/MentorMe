@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="loginLoading">#9E9E9E</color>
     <color name="toolBarColor">#EEEEEE</color>
+    <color name="lightGreenBlue">#d6f5f5</color>
 </resources>
