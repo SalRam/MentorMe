@@ -1,18 +1,10 @@
-package mentorme.csumb.edu.mentorme.login.homeScreen;
+package mentorme.csumb.edu.mentorme.homeScreen;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
-import android.graphics.Color;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ListAdapter;
 import android.widget.SimpleAdapter;
 
@@ -24,7 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import mentorme.csumb.edu.mentorme.R;
-import mentorme.csumb.edu.mentorme.login.webRequest.WebRequest;
+import mentorme.csumb.edu.mentorme.webRequest.WebRequest;
 
 public class HomeActivity extends ListActivity {
 

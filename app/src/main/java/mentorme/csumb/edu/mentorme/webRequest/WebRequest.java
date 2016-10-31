@@ -1,4 +1,4 @@
-package mentorme.csumb.edu.mentorme.login.webRequest;
+package mentorme.csumb.edu.mentorme.webRequest;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
