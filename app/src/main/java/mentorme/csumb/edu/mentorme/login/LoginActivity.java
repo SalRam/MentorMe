@@ -8,7 +8,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import butterknife.ButterKnife;
 import io.fabric.sdk.android.Fabric;
-import mentorme.csumb.edu.mentorme.login.mentorMeActivity.MentorMeActivity;
+import mentorme.csumb.edu.mentorme.mentorMeActivity.MentorMeActivity;
 
 /**
  * A login screen that offers login via email/password.

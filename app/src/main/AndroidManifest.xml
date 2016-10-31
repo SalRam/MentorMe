@@ -29,7 +29,7 @@
             android:value="e98e2f89d256b2302927f46e1422d5312e6089df" />
 
         <activity
-            android:name=".login.homeScreen.HomeActivity"
+            android:name=".homeScreen.HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
