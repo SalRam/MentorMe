@@ -1,4 +1,4 @@
-package mentorme.csumb.edu.mentorme.MentorMeApi;
+package mentorme.csumb.edu.mentorme.mentorMeApi;
 
 import mentorme.csumb.edu.mentorme.data.model.Subjects;
 import retrofit2.Call;
