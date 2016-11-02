@@ -1,27 +1,19 @@
 package mentorme.csumb.edu.mentorme.homeScreen;
 
 import android.app.ListActivity;
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListAdapter;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import mentorme.csumb.edu.mentorme.MentorMeApi.MentorMeApi;
+import mentorme.csumb.edu.mentorme.mentorMeApi.MentorMeApi;
 import mentorme.csumb.edu.mentorme.R;
 import mentorme.csumb.edu.mentorme.data.model.Item;
 import mentorme.csumb.edu.mentorme.data.model.Subjects;
-import mentorme.csumb.edu.mentorme.webRequest.WebRequest;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
