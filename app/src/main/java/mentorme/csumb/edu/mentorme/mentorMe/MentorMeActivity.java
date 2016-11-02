@@ -1,4 +1,4 @@
-package mentorme.csumb.edu.mentorme.mentorMeActivity;
+package mentorme.csumb.edu.mentorme.mentorMe;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

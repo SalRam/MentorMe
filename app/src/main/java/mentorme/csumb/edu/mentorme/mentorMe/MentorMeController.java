@@ -1,4 +1,4 @@
-package mentorme.csumb.edu.mentorme.mentorMeActivity;
+package mentorme.csumb.edu.mentorme.mentorMe;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
