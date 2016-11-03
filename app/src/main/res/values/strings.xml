@@ -17,4 +17,7 @@
 
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="invalid_account">Invalid account</string>
+    <string name="please_log_in_with_csumb_account">Please log in with a CSUMB account</string>
+    <string name="ok">Ok</string>
 </resources>

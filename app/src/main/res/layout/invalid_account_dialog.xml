@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@drawable/dialog_style"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/dialog_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/invalid_account"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/dialog_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/please_log_in_with_csumb_account"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="@android:color/darker_gray">
+
+        </View>
+
+        <Button
+            android:id="@+id/okay_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/ok"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</RelativeLayout>
