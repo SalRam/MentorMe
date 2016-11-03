@@ -1,7 +1,9 @@
 package mentorme.csumb.edu.mentorme.login;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
@@ -48,24 +50,25 @@ public class LoginLayout extends Subscriber<GoogleSignInResult>{
     public void onError(Throwable e) {
         hideProgressDialog();
         Log.d(TAG, e.getMessage());
-        Toast.makeText(mActivity.getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onNext(GoogleSignInResult googleSignInResult) {
         hideProgressDialog();
-        Toast.makeText(
-                mActivity.getApplicationContext(),
-                googleSignInResult.getSignInAccount().getEmail(),
-                Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Hides progress dialog
+     */
     public void hideProgressDialog() {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.hide();
         }
     }
 
+    /**
+     * Shows progress dialog
+     */
     public void showProgressDialog(){
         if (mProgressDialog == null){
             mProgressDialog = new ProgressDialog(mActivity);

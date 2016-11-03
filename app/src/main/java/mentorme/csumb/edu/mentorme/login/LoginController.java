@@ -1,7 +1,5 @@
 package mentorme.csumb.edu.mentorme.login;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -29,12 +27,14 @@ public class LoginController implements LoginLayout.Listener {
     private LoginModel mLoginModel;
     private GoogleApiClient mGoogleApiClient;
     private AppCompatActivity mActivity;
+    private AccountDialog mAccountDialog;
 
     public LoginController(@NonNull AppCompatActivity activity) {
 
         mActivity = activity;
         mLoginModel = new LoginModel();
         mLoginLayout = new LoginLayout(activity, this);
+        mAccountDialog = new AccountDialog(mActivity);
     }
 
     /**
@@ -49,7 +49,7 @@ public class LoginController implements LoginLayout.Listener {
             GoogleSignInResult result = opr.get();
             handleSignInResult(result);
         } else {
-            mLoginLayout.showProgressDialog();
+            mAccountDialog.show();
             opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
                 @Override
                 public void onResult(@NonNull GoogleSignInResult result) {
@@ -69,18 +69,9 @@ public class LoginController implements LoginLayout.Listener {
             else if (result.getSignInAccount() != null) {
                 Log.d(TAG, "EMAIL IS NOT VALID");
 
-                AlertDialog alertDialog = new AlertDialog.Builder(mActivity).create();
-                alertDialog.setTitle("Invalid Account");
-                alertDialog.setMessage("Please log in with CSUMB account");
-                alertDialog.setCanceledOnTouchOutside(false);
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                revokeAccess();
-                            }
-                        });
-                alertDialog.show();
+                revokeAccess();
+                AccountDialog dialog = new AccountDialog(mActivity);
+                dialog.show();
             }
         }
     }
