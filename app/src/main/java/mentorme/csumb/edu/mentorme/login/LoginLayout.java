@@ -1,7 +1,6 @@
 package mentorme.csumb.edu.mentorme.login;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
@@ -18,25 +17,23 @@ import rx.Subscriber;
 /**
  * Contains the functionality for the results that need to be displayed
  */
-public class LoginLayout extends Subscriber<GoogleSignInResult>{
+class LoginLayout extends Subscriber<GoogleSignInResult>{
+
+    private static final String TAG = "SignInActivity";
 
     @BindView(R.id.loading_sign_in) ProgressBar mProgressBar;
     @BindView(R.id.login_button) Button mLoginButton;
 
-    AppCompatActivity mActivity;
-    Context mContext;
+    private AppCompatActivity mActivity;
     private ProgressDialog mProgressDialog;
-    private static final String TAG = "SignInActivity";
 
-    private Listener listener;
+    private Listener mListener;
 
     LoginLayout(AppCompatActivity activity, Listener listener){
         mActivity = activity;
-        mContext= activity.getApplicationContext();
-
         mActivity.setContentView(R.layout.login);
 
-        this.listener = listener;
+        mListener = listener;
         ButterKnife.bind(this, mActivity);
     }
 
@@ -57,7 +54,7 @@ public class LoginLayout extends Subscriber<GoogleSignInResult>{
     /**
      * Hides progress dialog
      */
-    public void hideProgressDialog() {
+    void hideProgressDialog() {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.hide();
         }
@@ -66,7 +63,7 @@ public class LoginLayout extends Subscriber<GoogleSignInResult>{
     /**
      * Shows progress dialog
      */
-    public void showProgressDialog(){
+    private void showProgressDialog(){
         if (mProgressDialog == null){
             mProgressDialog = new ProgressDialog(mActivity);
             mProgressDialog.setMessage("Loading");
@@ -75,13 +72,13 @@ public class LoginLayout extends Subscriber<GoogleSignInResult>{
     }
 
     @OnClick(R.id.login_button)
-    public void onLoginButtonClicked() {
+    void onLoginButtonClicked() {
         showProgressDialog();
-        listener.onLoginButtonClick();
+        mListener.onLoginButtonClick();
 
     }
 
-    public interface Listener{
+    interface Listener{
         void onLoginButtonClick();
     }
 }
