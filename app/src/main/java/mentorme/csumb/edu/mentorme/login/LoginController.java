@@ -62,6 +62,7 @@ public class LoginController implements LoginLayout.Listener {
             if (isEmailValid(result.getSignInAccount().getEmail())) {
                 Log.d(TAG, "EMAIL IS VALID");
                 startHomeActivity();
+                mActivity.finish();
             }
             else if (result.getSignInAccount() != null) {
                 Log.d(TAG, "EMAIL IS NOT VALID");
