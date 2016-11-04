@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class Factory {
 
-    public final static String BASE_URL = "https://mentorme-api.appspot.com/_ah/api/helloworld/";
+    public final static String BASE_URL = "http://mentorme-api-2.us-west-2.elasticbeanstalk.com/mentorme/";
 
     private static MentorMeApi service;
 

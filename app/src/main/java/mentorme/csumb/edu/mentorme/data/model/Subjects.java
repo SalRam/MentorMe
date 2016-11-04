@@ -1,5 +1,4 @@
-
-package mentorme.csumb.edu.mentorme.data.model;
+package mentorme.csumb.edu.mentorme.data.model; ;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,68 +9,26 @@ import com.google.gson.annotations.SerializedName;
 @Generated("org.jsonschema2pojo")
 public class Subjects {
 
-    @SerializedName("items")
+    @SerializedName("subjects")
     @Expose
-    private List<Item> items = new ArrayList<Item>();
-    @SerializedName("kind")
-    @Expose
-    private String kind;
-    @SerializedName("etag")
-    @Expose
-    private String etag;
+    private List<Subject> subjects = new ArrayList<Subject>();
 
     /**
-     * 
+     *
      * @return
-     *     The items
+     *     The subjects
      */
-    public List<Item> getItems() {
-        return items;
+    public List<Subject> getSubjects() {
+        return subjects;
     }
 
     /**
-     * 
-     * @param items
-     *     The items
+     *
+     * @param subjects
+     *     The subjects
      */
-    public void setItems(List<Item> items) {
-        this.items = items;
-    }
-
-    /**
-     * 
-     * @return
-     *     The kind
-     */
-    public String getKind() {
-        return kind;
-    }
-
-    /**
-     * 
-     * @param kind
-     *     The kind
-     */
-    public void setKind(String kind) {
-        this.kind = kind;
-    }
-
-    /**
-     * 
-     * @return
-     *     The etag
-     */
-    public String getEtag() {
-        return etag;
-    }
-
-    /**
-     * 
-     * @param etag
-     *     The etag
-     */
-    public void setEtag(String etag) {
-        this.etag = etag;
+    public void setSubjects(List<Subject> subjects) {
+        this.subjects = subjects;
     }
 
 }

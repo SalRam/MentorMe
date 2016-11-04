@@ -48,13 +48,13 @@ class HomeLayout extends Subscriber<Subjects> {
     @Override
     public void onNext(Subjects subjects) {
 
-        ArrayList<HashMap<String, String>> list = mHomeModel.parseResponse(subjects.getItems());
+        ArrayList<HashMap<String, String>> list = mHomeModel.parseResponse(subjects.getSubjects());
 
         ListAdapter adapter = new SimpleAdapter(
                 mActivity, list,
                 R.layout.subjects_list,
-                new String[] {HomeModel.MESSAGE, HomeModel.KIND},
-                new int[]{R.id.message, R.id.kind}
+                new String[] {HomeModel.SUBJECT},
+                new int[]{R.id.subject}
         );
 
         mSubjectsList.setAdapter(adapter);

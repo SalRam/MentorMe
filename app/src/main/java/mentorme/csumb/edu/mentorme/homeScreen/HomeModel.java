@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import mentorme.csumb.edu.mentorme.data.model.Item;
+import mentorme.csumb.edu.mentorme.data.model.Subject;
 
 /**
  * Model for the {@link HomeActivity}.
@@ -12,8 +12,7 @@ import mentorme.csumb.edu.mentorme.data.model.Item;
 
 class HomeModel {
 
-    static final String MESSAGE = "message";
-    public static final String KIND = "kind";
+    static final String SUBJECT = "subject";
 
     HomeModel() { }
 
@@ -24,19 +23,18 @@ class HomeModel {
      *
      * @return The list of hashed values.
      */
-    ArrayList<HashMap<String, String>> parseResponse(List<Item> json) {
+    ArrayList<HashMap<String, String>> parseResponse(List<Subject> json) {
 
-            ArrayList<HashMap<String, String>> studentList = new ArrayList<>();
+            ArrayList<HashMap<String, String>> listOfSubjects = new ArrayList<>();
 
             for (int i = 0; i < json.size(); i++) {
 
-                HashMap<String, String> testSubjects = new HashMap<>();
+                HashMap<String, String> subject = new HashMap<>();
 
-                testSubjects.put(MESSAGE, json.get(i).getMessage());
-                testSubjects.put(KIND, json.get(i).getKind());
+                subject.put(SUBJECT, json.get(i).getSubject());
 
-                studentList.add(testSubjects);
+                listOfSubjects.add(subject);
             }
-            return studentList;
+            return listOfSubjects;
     }
 }
