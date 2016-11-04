@@ -13,7 +13,7 @@ public interface MentorMeApi {
      *
      * @return An Observable {@link Subjects}.
      */
-    @GET("v1/hellogreeting/")
+    @GET("csumb/list")
     rx.Observable<Subjects> getSubjects();
 
 }
