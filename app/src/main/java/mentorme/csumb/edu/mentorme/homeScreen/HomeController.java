@@ -15,6 +15,9 @@ class HomeController {
     private AppCompatActivity mActivity;
     private HomeLayout mHomeLayout;
 
+
+
+
     HomeController(@NonNull AppCompatActivity activity) {
         mActivity = activity;
         mHomeLayout = new HomeLayout(activity);
