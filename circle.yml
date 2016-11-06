@@ -16,7 +16,11 @@ dependencies:
 test:
    override:
      - ./gradlew testDebug
-   post:
+     - ./gradlew build test jacocoTestReport
+     - cp ./*/build/outputs/apk/*.apk $CIRCLE_ARTIFACTS/
+     - cp ./*/build/test-results/freeDebug/*.xml $CIRCLE_TEST_REPORTS/
+     - cd ./*/build/;bash <(curl -s https://codecov.io/bash)
+    post:
        - mkdir -p $CIRCLE_TEST_REPORTS/reports/
 
 notify:
