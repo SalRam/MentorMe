@@ -10,10 +10,12 @@ import butterknife.ButterKnife;
 import io.fabric.sdk.android.Fabric;
 import mentorme.csumb.edu.mentorme.mentorMe.MentorMeActivity;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends MentorMeActivity {
+public class LoginActivity extends MentorMeActivity{
 
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
@@ -33,17 +35,21 @@ public class LoginActivity extends MentorMeActivity {
         ButterKnife.bind(this);
     }
 
+    public LoginController getController() {
+        return mLoginController;
+    }
+
     @Override
     public void onStart() {
         super.onStart();
 
-        mLoginController.initialSubscriber(mGoogleApiClient);
+        getController().initialSubscriber(mGoogleApiClient);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        mLoginController.onActivityResult(requestCode, data);
+        getController().onActivityResult(requestCode, data);
     }
 }
 
