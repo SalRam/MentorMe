@@ -38,7 +38,6 @@ import static org.hamcrest.core.IsEqual.equalTo;
 @RunWith(AndroidJUnit4.class)
 public class viewLisIT {
 
-
     @Rule
     public ActivityTestRule<HomeActivity> mLoginActivity = new ActivityTestRule<>(HomeActivity.class);
 
@@ -48,6 +47,5 @@ public class viewLisIT {
         onView(withText("CST"))
                 .check(matches(isDisplayed()));
     }
-
 
 }

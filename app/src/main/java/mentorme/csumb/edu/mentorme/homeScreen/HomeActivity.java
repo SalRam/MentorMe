@@ -1,21 +1,12 @@
 package mentorme.csumb.edu.mentorme.homeScreen;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
-
-import mentorme.csumb.edu.mentorme.R;
 import mentorme.csumb.edu.mentorme.mentorMe.MentorMeActivity;
 
 /**
  * Activity class for the HomeActivity.
  */
-public  class HomeActivity extends MentorMeActivity implements NavigationView.OnNavigationItemSelectedListener{
+public  class HomeActivity extends MentorMeActivity{
 
     private static final String TAG = "HomeActivity";
 
@@ -24,24 +15,8 @@ public  class HomeActivity extends MentorMeActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
 
         mHomeController = new HomeController(this);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.open, R.string.close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return false;
-    }
 }
