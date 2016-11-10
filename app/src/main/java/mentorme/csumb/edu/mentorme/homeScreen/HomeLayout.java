@@ -82,6 +82,6 @@ class HomeLayout extends Subscriber<Subjects> {
      */
     public interface HomeLayoutListener{
 
-        public void onNavigationMenuClick();
+        void onNavigationMenuClick();
     }
 }
