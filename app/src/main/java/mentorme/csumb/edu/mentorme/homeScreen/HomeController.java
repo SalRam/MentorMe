@@ -10,14 +10,14 @@ import rx.schedulers.Schedulers;
 /**
  * Controller for the {@link HomeActivity}.
  */
-class HomeController {
+class HomeController implements HomeLayout.HomeLayoutListener {
 
     private AppCompatActivity mActivity;
     private HomeLayout mHomeLayout;
 
     HomeController(@NonNull AppCompatActivity activity) {
         mActivity = activity;
-        mHomeLayout = new HomeLayout(activity);
+        mHomeLayout = new HomeLayout(activity, this);
         onAttach();
     }
 
@@ -27,4 +27,7 @@ class HomeController {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(mHomeLayout);
     }
+
+    @Override
+    public void onNavigationMenuClick() { }
 }
