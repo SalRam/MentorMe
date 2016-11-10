@@ -11,14 +11,14 @@ public class Subjects {
 
     @SerializedName("subjects")
     @Expose
-    private List<Subject> subjects = new ArrayList<Subject>();
+    private ArrayList<Subject> subjects = new ArrayList<Subject>();
 
     /**
      *
      * @return
      *     The subjects
      */
-    public List<Subject> getSubjects() {
+    public ArrayList<Subject> getSubjects() {
         return subjects;
     }
 
@@ -27,7 +27,7 @@ public class Subjects {
      * @param subjects
      *     The subjects
      */
-    public void setSubjects(List<Subject> subjects) {
+    public void setSubjects(ArrayList<Subject> subjects) {
         this.subjects = subjects;
     }
 

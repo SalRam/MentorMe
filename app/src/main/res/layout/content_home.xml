@@ -12,9 +12,9 @@
     tools:context=".homeScreen.HomeActivity"
     tools:showIn="@layout/activity_home">
 
-    <ListView
-        android:id="@+id/subjects_list"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/subjects"
+        android:scrollbars="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@null"/>
+        android:layout_height="match_parent"/>
 </RelativeLayout>
