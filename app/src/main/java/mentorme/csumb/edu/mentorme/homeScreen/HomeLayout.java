@@ -1,14 +1,20 @@
 package mentorme.csumb.edu.mentorme.homeScreen;
 
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import mentorme.csumb.edu.mentorme.R;
+
+import butterknife.OnClick;
 import mentorme.csumb.edu.mentorme.data.model.Subjects;
+import mentorme.csumb.edu.mentorme.R;
 import mentorme.csumb.edu.mentorme.homeScreen.homeLayoutAdapter.SubjectsAdapter;
 import rx.Subscriber;
 
@@ -22,14 +28,34 @@ class HomeLayout extends Subscriber<Subjects> {
 
     private AppCompatActivity mActivity;
 
+    @BindView(R.id.drawer_layout) DrawerLayout mDrawer;
+    @BindView(R.id.nav_view) NavigationView mNavigationView;
     @BindView(R.id.subjects) RecyclerView mRecyclerView;
+    @BindView(R.id.toolbar) Toolbar mToolbar;
 
-    HomeLayout(AppCompatActivity activity) {
+    private HomeLayoutListener mHomeListener;
+
+    HomeLayout(AppCompatActivity activity, HomeLayoutListener listener) {
 
         mActivity = activity;
         mActivity.setContentView(R.layout.activity_home);
 
+        mHomeListener = listener;
+
         ButterKnife.bind(this, mActivity);
+
+        mActivity.setSupportActionBar(mToolbar);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                mActivity, mDrawer, mToolbar, R.string.open, R.string.close);
+        mDrawer.addDrawerListener(toggle);
+        toggle.syncState();
+    }
+
+    @OnClick(R.id.nav_view)
+    public void onNavigationMenuClick(){
+
+        mHomeListener.onNavigationMenuClick();
     }
 
     @Override
@@ -49,6 +75,13 @@ class HomeLayout extends Subscriber<Subjects> {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity.getApplicationContext()));
         mRecyclerView.setAdapter(adapter);
+    }
 
+    /**
+     * Listener for the {@link HomeLayout}
+     */
+    public interface HomeLayoutListener{
+
+        public void onNavigationMenuClick();
     }
 }
