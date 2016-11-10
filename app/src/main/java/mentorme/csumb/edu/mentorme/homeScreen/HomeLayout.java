@@ -1,18 +1,15 @@
 package mentorme.csumb.edu.mentorme.homeScreen;
 
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import mentorme.csumb.edu.mentorme.data.model.Subjects;
 import mentorme.csumb.edu.mentorme.R;
+import mentorme.csumb.edu.mentorme.data.model.Subjects;
+import mentorme.csumb.edu.mentorme.homeScreen.homeLayoutAdapter.SubjectsAdapter;
 import rx.Subscriber;
 
 /**
@@ -24,15 +21,13 @@ class HomeLayout extends Subscriber<Subjects> {
     private final String TAG = "HomeLayout";
 
     private AppCompatActivity mActivity;
-    private HomeModel mHomeModel;
 
-    @BindView(R.id.subjects_list) ListView mSubjectsList;
+    @BindView(R.id.subjects) RecyclerView mRecyclerView;
 
     HomeLayout(AppCompatActivity activity) {
 
         mActivity = activity;
         mActivity.setContentView(R.layout.activity_home);
-        mHomeModel = new HomeModel();
 
         ButterKnife.bind(this, mActivity);
     }
@@ -48,15 +43,12 @@ class HomeLayout extends Subscriber<Subjects> {
     @Override
     public void onNext(Subjects subjects) {
 
-        ArrayList<HashMap<String, String>> list = mHomeModel.parseResponse(subjects.getSubjects());
+        SubjectsAdapter adapter = new SubjectsAdapter(
+                mActivity.getApplicationContext(),
+                subjects.getSubjects());
 
-        ListAdapter adapter = new SimpleAdapter(
-                mActivity, list,
-                R.layout.subjects_list,
-                new String[] {HomeModel.SUBJECT},
-                new int[]{R.id.subject}
-        );
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity.getApplicationContext()));
+        mRecyclerView.setAdapter(adapter);
 
-        mSubjectsList.setAdapter(adapter);
     }
 }
