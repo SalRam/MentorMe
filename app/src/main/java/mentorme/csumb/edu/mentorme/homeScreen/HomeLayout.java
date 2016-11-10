@@ -50,6 +50,7 @@ class HomeLayout extends Subscriber<Subjects> {
                 mActivity, mDrawer, mToolbar, R.string.open, R.string.close);
         mDrawer.addDrawerListener(toggle);
         toggle.syncState();
+
     }
 
     @OnClick(R.id.nav_view)
@@ -82,6 +83,6 @@ class HomeLayout extends Subscriber<Subjects> {
      */
     public interface HomeLayoutListener{
 
-        public void onNavigationMenuClick();
+        void onNavigationMenuClick();
     }
 }
