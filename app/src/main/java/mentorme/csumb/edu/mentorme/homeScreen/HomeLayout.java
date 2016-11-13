@@ -30,8 +30,8 @@ class HomeLayout extends Subscriber<Subjects> {
 
     @BindView(R.id.drawer_layout) DrawerLayout mDrawer;
     @BindView(R.id.nav_view) NavigationView mNavigationView;
-    @BindView(R.id.subjects) RecyclerView mRecyclerView;
-    @BindView(R.id.toolbar) Toolbar mToolbar;
+    @BindView(R.id.recycler_view) RecyclerView mRecyclerView;
+    @BindView(R.id.toolbar_layout) Toolbar mToolbar;
 
     private HomeLayoutListener mHomeListener;
 
