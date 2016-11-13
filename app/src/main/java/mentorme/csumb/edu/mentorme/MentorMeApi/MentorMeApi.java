@@ -1,6 +1,7 @@
 package mentorme.csumb.edu.mentorme.mentorMeApi;
 
-import mentorme.csumb.edu.mentorme.data.model.Subjects;
+import mentorme.csumb.edu.mentorme.data.model.subjects.Subjects;
+import mentorme.csumb.edu.mentorme.data.model.topics.Topics;
 import retrofit2.http.GET;
 
 /**
@@ -15,5 +16,8 @@ public interface MentorMeApi {
      */
     @GET("csumb/list")
     rx.Observable<Subjects> getSubjects();
+
+    @GET("csumb/cst/list")
+    rx.Observable<Topics> getTopics();
 
 }

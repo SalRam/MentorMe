@@ -1,4 +1,4 @@
-package mentorme.csumb.edu.mentorme.data.model;
+package mentorme.csumb.edu.mentorme.data.model.subjects;
 
 import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;

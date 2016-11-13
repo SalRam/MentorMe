@@ -1,4 +1,4 @@
-package mentorme.csumb.edu.mentorme.homeScreen.homeLayoutAdapter;
+package mentorme.csumb.edu.mentorme.topicScreen.topicsLayoutAdapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,27 +16,21 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import mentorme.csumb.edu.mentorme.R;
-import mentorme.csumb.edu.mentorme.data.model.subjects.Subject;
+import mentorme.csumb.edu.mentorme.data.model.topics.Topic;
 import mentorme.csumb.edu.mentorme.topicScreen.TopicActivity;
 
 /**
- * Subjects Adapter for the Recycler view.
+ * Created by benitosanchez on 11/13/16.
  */
 
-public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.ViewHolder> {
+public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder> {
 
-    private ArrayList<Subject> mSubjects;
+    private ArrayList<Topic> mTopics;
     private Context mContext;
 
-    /**
-     * Initialises Adapter
-     *
-     * @param context Context for the adater.
-     * @param subjects A container of subjects to be displayed by the adapter.
-     */
-    public SubjectsAdapter(Context context, ArrayList<Subject> subjects) {
+    public TopicsAdapter(Context context, ArrayList<Topic> topics) {
         mContext = context;
-        mSubjects = subjects;
+        mTopics = topics;
     }
 
     public Context getContext() {
@@ -48,42 +42,29 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.ViewHo
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        View contactView = inflater.inflate(R.layout.subject, parent, false);
+        View topicView = inflater.inflate(R.layout.subject, parent, false);
 
-        ViewHolder viewHolder = new ViewHolder(contactView);
+        ViewHolder viewHolder = new ViewHolder(topicView);
 
         return viewHolder;
     }
 
-    /**
-     * Given a holder, fills holder view values from list of subjects.
-     *
-     * @param holder View holder.
-     * @param position Value's position.
-     */
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Subject subject = mSubjects.get(position);
+        Topic topic = mTopics.get(position);
 
         Button button = holder.subjectButton;
-        button.setText(subject.getSubject());
+        button.setText(topic.getTopic() + "\n" + topic.getTitle());
     }
 
-    /**
-     * Provides the number of values in the subjects container.
-     *
-     * @return The number of values in the subjects container.
-     */
     @Override
     public int getItemCount() {
-        return mSubjects.size();
+        return mTopics.size();
     }
 
-    /**
-     * View holder.
-     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.subject_button) Button subjectButton;
+        @BindView(R.id.subject_button)
+        Button subjectButton;
         private final Context context;
 
         public ViewHolder(View itemView) {
@@ -94,8 +75,8 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.ViewHo
 
         @OnClick(R.id.subject_button)
         public void onButtonClick(Button button) {
-            Intent intent = new Intent(context, TopicActivity.class);
-            context.startActivity(intent);
+//            Intent intent = new Intent(context, TopicActivity.class);
+//            context.startActivity(intent);
 
             Toast.makeText(context, button.getText(), Toast.LENGTH_SHORT).show();
             Log.d("View Holder", button.getText().toString());
