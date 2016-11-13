@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import mentorme.csumb.edu.mentorme.R;
 import mentorme.csumb.edu.mentorme.data.model.Subject;
-import mentorme.csumb.edu.mentorme.topicsScreen.TopicsActivity;
+import mentorme.csumb.edu.mentorme.topicScreen.TopicActivity;
 
 /**
  * Subjects Adapter for the Recycler view.
@@ -94,7 +94,7 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.ViewHo
 
         @OnClick(R.id.subject_button)
         public void onButtonClick(Button button) {
-            Intent intent = new Intent(context, TopicsActivity.class);
+            Intent intent = new Intent(context, TopicActivity.class);
             context.startActivity(intent);
 
             Toast.makeText(context, button.getText(), Toast.LENGTH_SHORT).show();
