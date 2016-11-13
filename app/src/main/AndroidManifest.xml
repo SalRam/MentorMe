@@ -31,9 +31,12 @@
 
         <activity
             android:name=".homeScreen.HomeActivity"
-            android:label="@string/title_activity_home"
+            android:label=""
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".topicsScreen.TopicsActivity"></activity>
+        <activity android:name=".topicScreen.TopicActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
     </application>
 
 </manifest>
