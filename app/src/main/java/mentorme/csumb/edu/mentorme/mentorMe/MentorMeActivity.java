@@ -1,9 +1,17 @@
 package mentorme.csumb.edu.mentorme.mentorMe;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.google.android.gms.common.api.GoogleApiClient;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import mentorme.csumb.edu.mentorme.R;
 
 /**
  * MentorMeActivity will be a super activity that initializes default set up for each activity.
