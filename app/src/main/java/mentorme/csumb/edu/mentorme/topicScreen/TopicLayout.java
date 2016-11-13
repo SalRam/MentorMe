@@ -4,19 +4,25 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import mentorme.csumb.edu.mentorme.R;
+import mentorme.csumb.edu.mentorme.data.model.topics.Topics;
+import mentorme.csumb.edu.mentorme.homeScreen.homeLayoutAdapter.SubjectsAdapter;
+import mentorme.csumb.edu.mentorme.topicScreen.topicsLayoutAdapter.TopicsAdapter;
+import rx.Subscriber;
 
 /**
  * Handles user Interface for Topics.
  */
-public class TopicLayout {
+public class TopicLayout extends Subscriber<Topics> {
 
     private final String TAG = "TopicLayout";
 
@@ -50,6 +56,26 @@ public class TopicLayout {
     public void onNavigationMenuClick(){
 
         mListener.onNavigationMenuClick();
+    }
+
+    @Override
+    public void onCompleted() {
+
+    }
+
+    @Override
+    public void onError(Throwable e) {
+        Log.d(TAG, e.getMessage());
+    }
+
+    @Override
+    public void onNext(Topics topics) {
+        TopicsAdapter adapter = new TopicsAdapter(
+                mActivity.getApplicationContext(),
+                topics.getTopics());
+
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity.getApplicationContext()));
+        mRecyclerView.setAdapter(adapter);
     }
 
     /**
