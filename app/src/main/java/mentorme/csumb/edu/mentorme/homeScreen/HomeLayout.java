@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,18 +33,19 @@ class HomeLayout extends Subscriber<Subjects> {
     @BindView(R.id.nav_view) NavigationView mNavigationView;
     @BindView(R.id.recycler_view) RecyclerView mRecyclerView;
     @BindView(R.id.toolbar_layout) Toolbar mToolbar;
+    @BindView(R.id.toolbar_title) TextView mTooblarTitle;
 
     private HomeLayoutListener mHomeListener;
 
     HomeLayout(AppCompatActivity activity, HomeLayoutListener listener) {
 
         mActivity = activity;
-        mActivity.setContentView(R.layout.activity_home);
+        mActivity.setContentView(R.layout.app_main_layout);
 
         mHomeListener = listener;
 
         ButterKnife.bind(this, mActivity);
-
+        mTooblarTitle.setText("Subjects");
         mActivity.setSupportActionBar(mToolbar);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
