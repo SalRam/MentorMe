@@ -1,5 +1,6 @@
 package mentorme.csumb.edu.mentorme.homeScreen;
 
+import android.media.Image;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -8,6 +9,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -34,6 +37,7 @@ class HomeLayout extends Subscriber<Subjects> {
     @BindView(R.id.recycler_view) RecyclerView mRecyclerView;
     @BindView(R.id.toolbar_layout) Toolbar mToolbar;
     @BindView(R.id.toolbar_title) TextView mTooblarTitle;
+    @BindView(R.id.network_error_layout) LinearLayout mNetworkErrorLayout;
 
     private HomeLayoutListener mHomeListener;
 
@@ -66,6 +70,8 @@ class HomeLayout extends Subscriber<Subjects> {
     @Override
     public void onError(Throwable e) {
         Log.d(TAG, e.getMessage());
+        mNetworkErrorLayout.setVisibility(View.VISIBLE);
+
     }
 
     @Override
