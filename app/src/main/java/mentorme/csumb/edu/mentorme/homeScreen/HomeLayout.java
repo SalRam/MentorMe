@@ -52,6 +52,8 @@ class HomeLayout extends Subscriber<Subjects> {
                 mActivity, mDrawer, mToolbar, R.string.open, R.string.close);
         mDrawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        mNavigationView.setNavigationItemSelectedListener(new NavigationMenu(mActivity));
     }
 
     @OnClick(R.id.nav_view)
