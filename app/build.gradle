@@ -50,6 +50,7 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.robolectric:robolectric:3.1.2'
+    testCompile "org.mockito:mockito-core:2.0.57-beta"
 
     // Espresso support
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
