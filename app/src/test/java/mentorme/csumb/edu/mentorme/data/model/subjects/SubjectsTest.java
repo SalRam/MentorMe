@@ -15,7 +15,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertArrayEquals;
 
 /**
- * Created by benitosanchez on 11/14/16.
+ * Unit tests for {@link Subjects} functionality.
  */
 @RunWith(JUnit4.class)
 public class SubjectsTest {
