@@ -1,6 +1,5 @@
 package mentorme.csumb.edu.mentorme.homeScreen;
 
-import android.media.Image;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,10 +14,9 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 import butterknife.OnClick;
-import mentorme.csumb.edu.mentorme.data.model.subjects.Subjects;
 import mentorme.csumb.edu.mentorme.R;
+import mentorme.csumb.edu.mentorme.data.model.subjects.Subjects;
 import mentorme.csumb.edu.mentorme.homeScreen.homeLayoutAdapter.SubjectsAdapter;
 import rx.Subscriber;
 
@@ -26,7 +24,7 @@ import rx.Subscriber;
  * Contains the functionality for the result that need to be displayed
  */
 
-class HomeLayout extends Subscriber<Subjects> {
+public class HomeLayout extends Subscriber<Subjects> {
 
     private final String TAG = "HomeLayout";
 

@@ -10,12 +10,12 @@ import rx.schedulers.Schedulers;
 /**
  * Controller for the {@link HomeActivity}.
  */
-class HomeController implements HomeLayout.HomeLayoutListener {
+public class HomeController implements HomeLayout.HomeLayoutListener {
 
     private AppCompatActivity mActivity;
     private HomeLayout mHomeLayout;
 
-    HomeController(@NonNull AppCompatActivity activity) {
+    public HomeController(@NonNull AppCompatActivity activity) {
         mActivity = activity;
         mHomeLayout = new HomeLayout(activity, this);
         onAttach();
