@@ -17,8 +17,10 @@ test:
    override:
      - ./gradlew testDebug
    post:
-       - mkdir -p $CIRCLE_TEST_REPORTS/reports/
-       - bash <(curl -s https://codecov.io/bash)
+    - mkdir -p $CIRCLE_TEST_REPORTS/junit/
+    - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+    - bash <(curl -s https://codecov.io/bash)
+
 notify:
   webhooks:
     - url: http://csumbse.net/harbormaster/hook/circleci/
