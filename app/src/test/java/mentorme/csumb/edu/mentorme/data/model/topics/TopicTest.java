@@ -4,13 +4,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 
 /**
- * Unit test coverage for {@link Topic}.
+ * * Unit test coverage for {@link Topic}.
  */
+
 @RunWith(JUnit4.class)
 public class TopicTest {
     private final String MATCH_TOPIC = "CST";
@@ -19,10 +19,10 @@ public class TopicTest {
     private final String NO_MATCH_TITLE = "English 1";
 
     private Topic mTopic;
-
     @Before
     public void onSetup() {
         mTopic = new Topic();
+
     }
 
     @Test
