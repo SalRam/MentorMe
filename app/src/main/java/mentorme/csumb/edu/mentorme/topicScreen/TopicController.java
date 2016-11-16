@@ -11,10 +11,10 @@ import rx.schedulers.Schedulers;
  */
 public class TopicController implements TopicLayout.TopicLayoutListener {
 
-    private AppCompatActivity mActivity;
+    private TopicActivity mActivity;
     private TopicLayout mTopicLayout;
 
-    TopicController(AppCompatActivity activity) {
+    TopicController(TopicActivity activity) {
         mActivity = activity;
         mTopicLayout = new TopicLayout(mActivity, this);
 
