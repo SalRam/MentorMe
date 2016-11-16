@@ -6,12 +6,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/network_error_layout"
-    android:visibility="gone">
+    android:background="@color/cardDialog"
+    android:visibility="gone"
+    android:divider="@android:color/transparent"
+    app:layout_collapseParallaxMultiplier="1.0">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/cloud"
         android:scaleType="centerCrop"
-        android:id="@+id/network_error" />
+        android:id="@+id/network_error"
+        android:background="@color/cast_expanded_controller_ad_container_white_stripe_color" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAlignment="center"
+        android:text="Something went wrong. \nPlease try again later."
+        android:textStyle="bold"/>
 </LinearLayout>
