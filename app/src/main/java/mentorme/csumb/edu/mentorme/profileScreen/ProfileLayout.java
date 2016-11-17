@@ -19,7 +19,7 @@ public class ProfileLayout {
 
     private static final String TAG = "ProfileLayout";
 
-    @BindView(R.id.toolbar_no_menu) Toolbar mToolbar;
+    @BindView(R.id.toolbar_with_back_arrow) Toolbar mToolbar;
     @BindView(R.id.toolbar_title) TextView mToolbarTitle;
     @BindView(R.id.toolbar_back_arrow) ImageView mBackArrow;
     @BindView(R.id.student_display_name) TextView mStudentDisplayName;

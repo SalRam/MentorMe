@@ -42,7 +42,7 @@ public class HomeLayout extends Subscriber<Subjects> {
     HomeLayout(AppCompatActivity activity, HomeLayoutListener listener) {
 
         mActivity = activity;
-        mActivity.setContentView(R.layout.app_main_layout);
+        mActivity.setContentView(R.layout.main_home);
 
         mHomeListener = listener;
 

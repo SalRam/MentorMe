@@ -1,48 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".topicScreen.TopicActivity">
+    tools:context=".topicScreen.TopicActivity"
+    android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+    <include layout="@layout/toolbar_layout"/>
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_no_menu"
-            android:minHeight="?attr/actionBarSize"
-            android:layout_width="match_parent"
+    <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/background"
-            app:layout_scrollFlags="scroll|enterAlways"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
-
-            <ImageView
-                android:id="@+id/toolbar_back_arrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="?attr/homeAsUpIndicator"
-                android:scaleType="fitCenter" />
-
-            <TextView
-                android:id="@+id/toolbar_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
-                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-                android:layout_gravity="center" />
-
-        </android.support.v7.widget.Toolbar>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <TextView
@@ -60,7 +30,7 @@
                 android:textAlignment="center"
                 android:textStyle="bold"
                 android:textSize="100px"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="73dp" />
 
         </LinearLayout>
@@ -72,8 +42,8 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@color/cardDialog"
                 android:textAlignment="center"
                 android:textStyle="bold"
@@ -87,16 +57,9 @@
                 android:textStyle="bold"
                 android:textSize="100px"
                 android:background="@color/cardDialog"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="47dp" />
 
         </LinearLayout>
 
-
-
-        <include layout="@layout/home_layout" />
-
-    </android.support.design.widget.AppBarLayout>
-
-
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>
