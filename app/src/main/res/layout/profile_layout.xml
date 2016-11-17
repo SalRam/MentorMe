@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".topicScreen.TopicActivity"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+        <include layout="@layout/toolbar_layout"/>
+
+
+    </android.support.design.widget.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/cardDialog"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textSize="100px"
+                android:text="Name: " />
+
+            <TextView
+                android:id="@+id/student_display_name"
+                android:background="@color/cardDialog"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textSize="100px"
+                android:layout_width="wrap_content"
+                android:layout_height="73dp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/cardDialog"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textSize="100px"
+                android:text="Email: " />
+
+
+            <TextView
+                android:id="@+id/student_email"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textSize="100px"
+                android:background="@color/cardDialog"
+                android:layout_width="wrap_content"
+                android:layout_height="47dp" />
+
+        </LinearLayout>
+
+        <include layout="@layout/home_layout" />
+    
+</LinearLayout>
