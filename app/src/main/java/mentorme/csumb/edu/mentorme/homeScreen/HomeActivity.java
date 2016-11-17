@@ -1,9 +1,11 @@
 package mentorme.csumb.edu.mentorme.homeScreen;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.widget.Toast;
 
 import mentorme.csumb.edu.mentorme.R;
@@ -46,12 +48,7 @@ public  class HomeActivity extends MentorMeActivity {
     protected void onStart() {
         super.onStart();
         if (authenticate()) {
-            User user = userLocalStorage.getLoggedInUser();
-
-            Toast.makeText(this, user.getDisplayName(), Toast.LENGTH_SHORT).show();
-            Toast.makeText(this, user.getFamilyName(), Toast.LENGTH_SHORT).show();
-            Toast.makeText(this, user.getGivenName(), Toast.LENGTH_SHORT).show();
-            Toast.makeText(this, user.getEmail(), Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "Logged in Successfully");
         }
     }
 

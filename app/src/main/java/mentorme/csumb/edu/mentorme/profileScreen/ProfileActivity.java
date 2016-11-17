@@ -11,17 +11,12 @@ import mentorme.csumb.edu.mentorme.R;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    @BindView(R.id.toolbar_layout) Toolbar mToolbar;
-    @BindView(R.id.toolbar_title) TextView mTooblarTitle;
+    private ProfileController mProfileController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.app_main_layout);
 
-        ButterKnife.bind(this);
-
-        mTooblarTitle.setText("Profile");
-        setSupportActionBar(mToolbar);
+        mProfileController = new ProfileController(this);
     }
 }
