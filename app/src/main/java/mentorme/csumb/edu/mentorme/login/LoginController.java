@@ -6,13 +6,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.auth.api.signin.SignInAccount;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
 import mentorme.csumb.edu.mentorme.homeScreen.HomeActivity;
+import mentorme.csumb.edu.mentorme.user.local.UserLocalStorage;
 
 
 /**
@@ -28,11 +31,15 @@ public class LoginController implements LoginLayout.Listener {
     private GoogleApiClient mGoogleApiClient;
     private AppCompatActivity mActivity;
 
+    private UserLocalStorage userLocalStorage;
+
     public LoginController(@NonNull AppCompatActivity activity) {
 
         mActivity = activity;
         mLoginModel = new LoginModel();
         mLoginLayout = new LoginLayout(activity, this);
+
+        userLocalStorage = new UserLocalStorage(mActivity.getApplicationContext());
     }
 
     /**
@@ -61,6 +68,7 @@ public class LoginController implements LoginLayout.Listener {
         if (result.isSuccess()) {
             if (isEmailValid(result.getSignInAccount().getEmail())) {
                 Log.d(TAG, "EMAIL IS VALID");
+                logUserIn(result.getSignInAccount());
                 startHomeActivity();
                 mActivity.finish();
             }
@@ -72,6 +80,12 @@ public class LoginController implements LoginLayout.Listener {
                 dialog.show();
             }
         }
+    }
+
+    private void logUserIn(GoogleSignInAccount account) {
+        userLocalStorage.storeUserData(account);
+        userLocalStorage.setStudentLoggedIn(true);
+        startHomeActivity();
     }
 
     private void revokeAccess() {
