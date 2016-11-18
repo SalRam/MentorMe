@@ -27,7 +27,7 @@ public class MentorMeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        mentorMeController = new MentorMeController();
+        mentorMeController = new MentorMeController(getApplicationContext());
         mGoogleApiClient = mentorMeController.getGoogleApiClient(this);
     }
 

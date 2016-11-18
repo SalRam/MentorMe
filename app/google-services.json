@@ -1,0 +1,87 @@
+{
+  "project_info": {
+    "project_number": "1094878569026",
+    "project_id": "mentorme-144402"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094878569026:android:582ade7bd19a674f",
+        "android_client_info": {
+          "package_name": "mentorme.csumb.edu.mentorm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1094878569026-43t5s1j7ki03bbqkjlnu8tsu7lu6kede.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVL5BqWkrYyMfDDDkIUrC3MIg9gqWDrYU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094878569026:android:1184a85cd19288e6",
+        "android_client_info": {
+          "package_name": "mentorme.csumb.edu.mentorme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1094878569026-rc9qiac2joc9fi2hme4k6t8pd62ccak6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mentorme.csumb.edu.mentorme",
+            "certificate_hash": "C63C376708407DE332987348DD416E783B64A614"
+          }
+        },
+        {
+          "client_id": "1094878569026-dufecu2fplf40ku0vks5gk24cgc74efg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mentorme.csumb.edu.mentorme",
+            "certificate_hash": "C82D3CEA9E6EA311C37597C7787394D7B78BFBBD"
+          }
+        },
+        {
+          "client_id": "1094878569026-43t5s1j7ki03bbqkjlnu8tsu7lu6kede.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVL5BqWkrYyMfDDDkIUrC3MIg9gqWDrYU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,6 @@
 package mentorme.csumb.edu.mentorme.mentorMe;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -15,9 +16,11 @@ public class MentorMeController implements GoogleApiClient.OnConnectionFailedLis
     private final String TAG = "MentorMeController";
     private GoogleApiSignInModel googleApiSignInModel;
     private GoogleApiClient mGoogleApiClient;
+    private Context mContext;
 
-    public MentorMeController() {
-        googleApiSignInModel = GoogleApiSignInModel.getInstance();
+    public MentorMeController(Context activity) {
+        mContext = activity;
+        googleApiSignInModel = GoogleApiSignInModel.getInstance(mContext);
     }
 
     /**
