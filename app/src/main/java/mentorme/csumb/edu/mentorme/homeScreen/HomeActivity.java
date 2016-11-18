@@ -1,18 +1,14 @@
 package mentorme.csumb.edu.mentorme.homeScreen;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
-import android.widget.Toast;
 
 import mentorme.csumb.edu.mentorme.R;
-import mentorme.csumb.edu.mentorme.data.model.topics.Topic;
 import mentorme.csumb.edu.mentorme.login.LoginActivity;
 import mentorme.csumb.edu.mentorme.mentorMe.MentorMeActivity;
-import mentorme.csumb.edu.mentorme.user.local.User;
 import mentorme.csumb.edu.mentorme.user.local.UserLocalStorage;
 
 /**
