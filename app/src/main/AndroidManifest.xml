@@ -37,6 +37,7 @@
             android:name=".topicScreen.TopicActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".profileScreen.ProfileActivity"></activity>
+        <activity android:name=".mentorScreen.MentorActivity"></activity>
     </application>
 
 </manifest>

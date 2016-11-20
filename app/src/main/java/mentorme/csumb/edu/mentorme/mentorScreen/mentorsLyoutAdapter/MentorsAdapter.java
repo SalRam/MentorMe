@@ -1,13 +1,13 @@
-package mentorme.csumb.edu.mentorme.topicScreen.topicsLayoutAdapter;
+package mentorme.csumb.edu.mentorme.mentorScreen.mentorsLyoutAdapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -15,53 +15,56 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import mentorme.csumb.edu.mentorme.R;
-import mentorme.csumb.edu.mentorme.data.model.topics.Topic;
-import mentorme.csumb.edu.mentorme.mentorScreen.MentorActivity;
+import mentorme.csumb.edu.mentorme.data.model.mentors.Mentor;
 
 /**
- * Created by benitosanchez on 11/13/16.
+ * Mentors Adapter for the Recycler view.
  */
 
-public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder> {
 
-    private ArrayList<Topic> mTopics;
+public class MentorsAdapter extends RecyclerView.Adapter<MentorsAdapter.ViewHolder> {
+
+    private ArrayList<Mentor> mMentors;
     private Context mContext;
 
-    public TopicsAdapter(Context context, ArrayList<Topic> topics) {
+    public MentorsAdapter(Context context, ArrayList<Mentor> mentors) {
         mContext = context;
-        mTopics = topics;
-    }
-
-    public Context getContext() {
-        return mContext;
+        mMentors = mentors;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
+        View mentorView = inflater.inflate(R.layout.subject, parent, false);
 
-        View topicView = inflater.inflate(R.layout.subject, parent, false);
-
-        ViewHolder viewHolder = new ViewHolder(topicView);
+        MentorsAdapter.ViewHolder viewHolder = new MentorsAdapter.ViewHolder(mentorView);
 
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Topic topic = mTopics.get(position);
+        Mentor mentor = mMentors.get(position);
 
         Button button = holder.subjectButton;
-        button.setText(topic.getTopic() + "\n" + topic.getTitle());
+        button.setText(mentor.getName());
+
     }
 
     @Override
     public int getItemCount() {
-        return mTopics.size();
+        return mMentors.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+    public Context getContext() {
+        return mContext;
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder{
+
         @BindView(R.id.subject_button)
         Button subjectButton;
         private final Context context;
@@ -74,10 +77,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder
 
         @OnClick(R.id.subject_button)
         public void onButtonClick(Button button) {
-            Intent intent = new Intent(context, MentorActivity.class);
-            context.startActivity(intent);
-
-            //Toast.makeText(context, button.getText(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, button.getText(), Toast.LENGTH_SHORT).show();
             Log.d("View Holder", button.getText().toString());
         }
     }

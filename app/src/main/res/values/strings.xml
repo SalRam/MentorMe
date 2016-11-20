@@ -22,5 +22,6 @@
     <string name="please_log_in_with_csumb_account">Please log in with a CSUMB account</string>
     <string name="ok">Ok</string>
     <string name="topics">Topics</string>
+    <string name="mentors">Mentors</string>
     <string name="profile">Profile</string>
 </resources>
