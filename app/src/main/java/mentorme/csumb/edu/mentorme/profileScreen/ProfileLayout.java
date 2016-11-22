@@ -1,8 +1,16 @@
 package mentorme.csumb.edu.mentorme.profileScreen;
 
+import android.net.Uri;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
+
+import java.net.URI;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,7 +30,7 @@ public class ProfileLayout {
     @BindView(R.id.toolbar_no_menu) Toolbar mToolbar;
     @BindView(R.id.toolbar_title) TextView mToolbarTitle;
     @BindView(R.id.toolbar_back_arrow) ImageView mBackArrow;
-    @BindView(R.id.student_display_name) TextView mStudentDisplayName;
+    @BindView(R.id.student_name) EditText mStudentDisplayName;
     @BindView(R.id.student_email) TextView mStudentEmail;
 
     private UserLocalStorage userLocalStorage;
