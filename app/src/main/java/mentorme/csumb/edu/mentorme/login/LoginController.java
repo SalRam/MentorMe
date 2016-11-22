@@ -3,7 +3,10 @@ package mentorme.csumb.edu.mentorme.login;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.google.android.gms.actions.ItemListIntents;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
@@ -13,6 +16,8 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
+import butterknife.OnClick;
+import mentorme.csumb.edu.mentorme.R;
 import mentorme.csumb.edu.mentorme.homeScreen.HomeActivity;
 import mentorme.csumb.edu.mentorme.login.googleSignInModel.GoogleApiSignInModel;
 import mentorme.csumb.edu.mentorme.user.local.UserLocalStorage;

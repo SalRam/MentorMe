@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
+import butterknife.OnClick;
 import mentorme.csumb.edu.mentorme.R;
 import mentorme.csumb.edu.mentorme.login.LoginActivity;
 import mentorme.csumb.edu.mentorme.mentorMe.MentorMeActivity;
@@ -28,6 +31,19 @@ public  class HomeActivity extends MentorMeActivity {
 
         mHomeController = new HomeController(this);
         userLocalStorage = new UserLocalStorage(this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_options, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item) {
+
+        return mHomeController.onOptionsItemSelected(item);
     }
 
     @Override
