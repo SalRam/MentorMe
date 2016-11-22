@@ -20,7 +20,6 @@ import mentorme.csumb.edu.mentorme.R;
  */
 public class MentorMeActivity extends AppCompatActivity {
 
-    private GoogleApiClient mGoogleApiClient;
     private MentorMeController mentorMeController;
 
     @Override
@@ -28,15 +27,5 @@ public class MentorMeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         mentorMeController = new MentorMeController(getApplicationContext());
-        mGoogleApiClient = mentorMeController.getGoogleApiClient(this);
-    }
-
-    /**
-     * Returns mGoogleApiClient.
-     *
-     * @return {@link GoogleApiClient}
-     */
-    public GoogleApiClient getGoogleApiClient() {
-        return mGoogleApiClient;
     }
 }
