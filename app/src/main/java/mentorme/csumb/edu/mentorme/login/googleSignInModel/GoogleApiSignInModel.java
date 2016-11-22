@@ -1,4 +1,4 @@
-package mentorme.csumb.edu.mentorme.mentorMe;
+package mentorme.csumb.edu.mentorme.login.googleSignInModel;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -8,8 +8,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import mentorme.csumb.edu.mentorme.R;
-
-import static android.provider.Settings.Global.getString;
+import mentorme.csumb.edu.mentorme.login.LoginActivity;
+import mentorme.csumb.edu.mentorme.mentorMe.MentorMeController;
 
 /**
  * Super model for initializing google account sign in.
@@ -19,11 +19,13 @@ public class GoogleApiSignInModel {
     private static GoogleApiSignInModel instance = null;
 
     private GoogleSignInOptions gso;
+    private GoogleApiClient mGoogleApiClient;
 
     private GoogleApiSignInModel(Context context) {
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(context.getString(R.string.server_client_id))
                 .requestEmail()
+                .requestProfile()
                 .build();
     }
 
@@ -49,11 +51,16 @@ public class GoogleApiSignInModel {
      * @return returns {@link GoogleApiClient}
      */
     public GoogleApiClient getGoogleApiClient(
-            AppCompatActivity activity,
+            LoginActivity activity,
             GoogleApiClient.OnConnectionFailedListener listener) {
-        return new GoogleApiClient.Builder(activity)
-                .enableAutoManage(activity, listener)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
+
+        if (mGoogleApiClient != null) {
+            return mGoogleApiClient;
+        } else {
+            return new GoogleApiClient.Builder(activity)
+                    .enableAutoManage(activity, listener)
+                    .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                    .build();
+        }
     }
 }

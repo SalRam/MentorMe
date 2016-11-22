@@ -9,19 +9,21 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.auth.api.signin.SignInAccount;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
 import mentorme.csumb.edu.mentorme.homeScreen.HomeActivity;
+import mentorme.csumb.edu.mentorme.login.googleSignInModel.GoogleApiSignInModel;
 import mentorme.csumb.edu.mentorme.user.local.UserLocalStorage;
 
 
 /**
  * Logic implementation
  */
-public class LoginController implements LoginLayout.Listener {
+public class LoginController implements LoginLayout.Listener, GoogleApiClient.OnConnectionFailedListener {
 
     private static final int RC_SIGN_IN = 9001;
     private final String TAG = "LoginController";
@@ -29,17 +31,19 @@ public class LoginController implements LoginLayout.Listener {
     private LoginLayout mLoginLayout;
     private LoginModel mLoginModel;
     private GoogleApiClient mGoogleApiClient;
-    private AppCompatActivity mActivity;
+    private GoogleApiSignInModel mGoogleApiSignInModel;
+    private LoginActivity mActivity;
 
     private UserLocalStorage userLocalStorage;
 
-    public LoginController(@NonNull AppCompatActivity activity) {
+    public LoginController(@NonNull LoginActivity activity) {
 
         mActivity = activity;
         mLoginModel = new LoginModel();
         mLoginLayout = new LoginLayout(activity, this);
 
         userLocalStorage = new UserLocalStorage(mActivity.getApplicationContext());
+        mGoogleApiSignInModel = GoogleApiSignInModel.getInstance(mActivity);
     }
 
     /**
@@ -133,14 +137,19 @@ public class LoginController implements LoginLayout.Listener {
     /**
      *  makes a request to see if the user is already signed in(Api client is signed up)
      */
-    public void initialSubscriber(GoogleApiClient googleApiClient){
-        mGoogleApiClient = googleApiClient;
-        initialSignIn(googleApiClient);
+    public void initialSubscriber(){
+        mGoogleApiClient = mGoogleApiSignInModel.getGoogleApiClient(mActivity, this);
+        initialSignIn(mGoogleApiClient);
     }
 
     @Override
     public void onLoginButtonClick() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         mActivity.startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
 }

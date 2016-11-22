@@ -8,35 +8,17 @@ import android.util.Log;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import mentorme.csumb.edu.mentorme.login.googleSignInModel.GoogleApiSignInModel;
+
 /**
  * Super controller for MentorMe.
  */
-public class MentorMeController implements GoogleApiClient.OnConnectionFailedListener{
+public class MentorMeController {
 
     private final String TAG = "MentorMeController";
-    private GoogleApiSignInModel googleApiSignInModel;
-    private GoogleApiClient mGoogleApiClient;
     private Context mContext;
 
     public MentorMeController(Context activity) {
         mContext = activity;
-        googleApiSignInModel = GoogleApiSignInModel.getInstance(mContext);
-    }
-
-    /**
-     * Given an activity, returns GoogleApiClient from GoogleApiSignInModel
-     *
-     * @param activity class activity
-     * @return GoogleApiClient
-     */
-    public GoogleApiClient getGoogleApiClient(AppCompatActivity activity) {
-
-        mGoogleApiClient =  googleApiSignInModel.getGoogleApiClient(activity, this);
-        return mGoogleApiClient;
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Log.d(TAG, "onConnectionFailed: " + connectionResult);
     }
 }
