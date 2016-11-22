@@ -2,7 +2,7 @@
     <string name="app_name">MentorMe</string>
     <string name="empty_string"></string>
 
-    <string name="server_client_id">1094878569026-t1sa8nb1ko12lvf1j5d8lho6j1tm51ei.apps.googleusercontent.com</string>
+    <string name="server_client_id">1094878569026-43t5s1j7ki03bbqkjlnu8tsu7lu6kede.apps.googleusercontent.com</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
