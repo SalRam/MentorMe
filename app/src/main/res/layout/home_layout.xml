@@ -16,8 +16,7 @@
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/cloud"
         android:scaleType="centerCrop"
-        android:id="@+id/network_error"
-        android:background="@color/cast_expanded_controller_ad_container_white_stripe_color" />
+        android:id="@+id/network_error" />
 
     <TextView
         android:layout_width="match_parent"
