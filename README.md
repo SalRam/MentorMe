@@ -3,5 +3,4 @@ MentorMe is an android app that will provide CSUMB students with a way to search
 
 ==Android Artifact Url==
 
-
-https://137-67634710-gh.circle-artifacts.com/0/tmp/circle-artifacts.WReUaBG/app-debug.apk
+https://circleci.com/api/v1/project/benfallas/MentorMe/latest/artifacts/0/$CIRCLE_ARTIFACTS/app-debug.apk?filter=successful&branch=master
