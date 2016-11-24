@@ -1,7 +1,6 @@
 package mentorme.csumb.edu.mentorme.homeScreen;
 
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -15,22 +14,20 @@ import rx.schedulers.Schedulers;
  */
 public class HomeController implements HomeLayout.HomeLayoutListener {
 
-    private AppCompatActivity mActivity;
+    private HomeActivity mActivity;
     private HomeLayout mHomeLayout;
 
-    public HomeController(@NonNull AppCompatActivity activity) {
+    public HomeController(@NonNull HomeActivity activity) {
         mActivity = activity;
         mHomeLayout = new HomeLayout(activity, this);
         onAttach();
     }
-
     private void onAttach()  {
         Factory.getInstance().getSubjects()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(mHomeLayout);
     }
-
     @Override
     public void onNavigationMenuClick() { }
 

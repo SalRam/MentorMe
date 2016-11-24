@@ -1,14 +1,13 @@
 package mentorme.csumb.edu.mentorme.login.googleSignInModel;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import mentorme.csumb.edu.mentorme.R;
-import mentorme.csumb.edu.mentorme.login.LoginActivity;
+import mentorme.csumb.edu.mentorme.mentorMe.MentorMeActivity;
 import mentorme.csumb.edu.mentorme.mentorMe.MentorMeController;
 
 /**
@@ -28,7 +27,6 @@ public class GoogleApiSignInModel {
                 .requestProfile()
                 .build();
     }
-
     /**
      * If {@link GoogleApiSignInModel} is null, initialize GoogleApiSignModel.
      * Else return GoogleApiSignModel.
@@ -37,8 +35,9 @@ public class GoogleApiSignInModel {
      */
     public static GoogleApiSignInModel getInstance(Context context) {
         if (instance == null) {
-            instance = new GoogleApiSignInModel(context);
+             instance = new GoogleApiSignInModel(context);
         }
+
         return instance;
     }
 
@@ -51,7 +50,7 @@ public class GoogleApiSignInModel {
      * @return returns {@link GoogleApiClient}
      */
     public GoogleApiClient getGoogleApiClient(
-            LoginActivity activity,
+            MentorMeActivity activity,
             GoogleApiClient.OnConnectionFailedListener listener) {
 
         if (mGoogleApiClient != null) {

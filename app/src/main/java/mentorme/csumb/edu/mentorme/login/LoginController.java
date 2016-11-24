@@ -3,10 +3,7 @@ package mentorme.csumb.edu.mentorme.login;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.google.android.gms.actions.ItemListIntents;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
@@ -16,10 +13,7 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
-import butterknife.OnClick;
-import mentorme.csumb.edu.mentorme.R;
 import mentorme.csumb.edu.mentorme.homeScreen.HomeActivity;
-import mentorme.csumb.edu.mentorme.login.googleSignInModel.GoogleApiSignInModel;
 import mentorme.csumb.edu.mentorme.user.local.UserLocalStorage;
 
 
@@ -33,10 +27,7 @@ public class LoginController implements LoginLayout.Listener, GoogleApiClient.On
 
     private LoginLayout mLoginLayout;
     private LoginModel mLoginModel;
-    private GoogleApiClient mGoogleApiClient;
-    private GoogleApiSignInModel mGoogleApiSignInModel;
     private LoginActivity mActivity;
-
     private UserLocalStorage userLocalStorage;
 
     public LoginController(@NonNull LoginActivity activity) {
@@ -44,9 +35,7 @@ public class LoginController implements LoginLayout.Listener, GoogleApiClient.On
         mActivity = activity;
         mLoginModel = new LoginModel();
         mLoginLayout = new LoginLayout(activity, this);
-
         userLocalStorage = new UserLocalStorage(mActivity.getApplicationContext());
-        mGoogleApiSignInModel = GoogleApiSignInModel.getInstance(mActivity);
     }
 
     /**
@@ -96,7 +85,7 @@ public class LoginController implements LoginLayout.Listener, GoogleApiClient.On
     }
 
     private void revokeAccess() {
-        Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
+        Auth.GoogleSignInApi.revokeAccess(mActivity.getGoogleApiClient()).setResultCallback(new ResultCallback<Status>() {
             @Override
             public void onResult(@NonNull Status status) {
 
@@ -141,13 +130,13 @@ public class LoginController implements LoginLayout.Listener, GoogleApiClient.On
      *  makes a request to see if the user is already signed in(Api client is signed up)
      */
     public void initialSubscriber(){
-        mGoogleApiClient = mGoogleApiSignInModel.getGoogleApiClient(mActivity, this);
-        initialSignIn(mGoogleApiClient);
+
+        initialSignIn(mActivity.getGoogleApiClient());
     }
 
     @Override
     public void onLoginButtonClick() {
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mActivity.getGoogleApiClient());
         mActivity.startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 

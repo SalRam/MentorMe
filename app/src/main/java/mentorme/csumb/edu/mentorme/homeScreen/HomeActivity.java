@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import butterknife.OnClick;
 import mentorme.csumb.edu.mentorme.R;
 import mentorme.csumb.edu.mentorme.login.LoginActivity;
 import mentorme.csumb.edu.mentorme.mentorMe.MentorMeActivity;
@@ -32,7 +31,6 @@ public  class HomeActivity extends MentorMeActivity {
         mHomeController = new HomeController(this);
         userLocalStorage = new UserLocalStorage(this);
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_options, menu);
@@ -71,5 +69,13 @@ public  class HomeActivity extends MentorMeActivity {
             return false;
         }
         return true;
+    }
+
+    /*
+     * Returns the information of the user currently signed in
+     */
+    public UserLocalStorage getUserLocalStorage(){
+
+        return userLocalStorage;
     }
 }

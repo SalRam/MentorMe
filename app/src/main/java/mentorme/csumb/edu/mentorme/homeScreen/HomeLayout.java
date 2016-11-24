@@ -3,7 +3,6 @@ package mentorme.csumb.edu.mentorme.homeScreen;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -11,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,7 +27,7 @@ public class HomeLayout extends Subscriber<Subjects> {
 
     private final String TAG = "HomeLayout";
 
-    private AppCompatActivity mActivity;
+    private HomeActivity mActivity;
 
     @BindView(R.id.drawer_layout) DrawerLayout mDrawer;
     @BindView(R.id.nav_view) NavigationView mNavigationView;
@@ -40,7 +38,7 @@ public class HomeLayout extends Subscriber<Subjects> {
 
     private HomeLayoutListener mHomeListener;
 
-    HomeLayout(AppCompatActivity activity, HomeLayoutListener listener) {
+    HomeLayout(HomeActivity activity, HomeLayoutListener listener) {
 
         mActivity = activity;
         mActivity.setContentView(R.layout.app_main_layout);
@@ -58,13 +56,11 @@ public class HomeLayout extends Subscriber<Subjects> {
 
         mNavigationView.setNavigationItemSelectedListener(new NavigationMenu(mActivity));
     }
-
     @OnClick(R.id.nav_view)
     public void onNavigationMenuClick(){
 
         mHomeListener.onNavigationMenuClick();
     }
-
     @Override
     public void onCompleted() { }
 
@@ -74,7 +70,6 @@ public class HomeLayout extends Subscriber<Subjects> {
         mNetworkErrorLayout.setVisibility(View.VISIBLE);
 
     }
-
     @Override
     public void onNext(Subjects subjects) {
 
@@ -85,8 +80,6 @@ public class HomeLayout extends Subscriber<Subjects> {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity.getApplicationContext()));
         mRecyclerView.setAdapter(adapter);
     }
-
-
     /**
      * Listener for the {@link HomeLayout}
      */
