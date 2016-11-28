@@ -47,9 +47,7 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.ViewHo
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-
         View contactView = inflater.inflate(R.layout.subject, parent, false);
-
         ViewHolder viewHolder = new ViewHolder(contactView);
 
         return viewHolder;
@@ -83,6 +81,8 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.ViewHo
      * View holder.
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        private static String TAG = "SubjectsViewHolder";
+
         @BindView(R.id.subject_button) Button subjectButton;
         private final Context context;
 
@@ -97,8 +97,7 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.ViewHo
             Intent intent = new Intent(context, TopicActivity.class);
             context.startActivity(intent);
 
-            Toast.makeText(context, button.getText(), Toast.LENGTH_SHORT).show();
-            Log.d("View Holder", button.getText().toString());
+            Log.d(TAG, button.getText().toString());
         }
     }
 }

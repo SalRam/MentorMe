@@ -17,7 +17,6 @@ import mentorme.csumb.edu.mentorme.login.googleSignInModel.GoogleApiSignInModel;
 public class MentorMeActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
 
     private MentorMeController mentorMeController;
-
     private GoogleApiClient mGoogleApiClient;
 
     private GoogleApiSignInModel mGoogleApiSignInModel;
@@ -38,14 +37,6 @@ public class MentorMeActivity extends AppCompatActivity implements GoogleApiClie
         return mGoogleApiClient;
     }
 
-    public GoogleApiSignInModel getGoogleApiSignInModel(){
-
-        return mGoogleApiSignInModel;
-    }
-
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
-    
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) { }
 }

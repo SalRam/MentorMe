@@ -18,10 +18,9 @@ import mentorme.csumb.edu.mentorme.user.local.UserLocalStorage;
  */
 public  class HomeActivity extends MentorMeActivity {
 
-    private UserLocalStorage userLocalStorage;
-
     private static final String TAG = "HomeActivity";
 
+    private UserLocalStorage userLocalStorage;
     private HomeController mHomeController;
 
     @Override

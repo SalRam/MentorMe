@@ -19,9 +19,8 @@ import mentorme.csumb.edu.mentorme.data.model.topics.Topic;
 import mentorme.csumb.edu.mentorme.mentorScreen.MentorActivity;
 
 /**
- * Created by benitosanchez on 11/13/16.
+ * Recycle View adapter for Topic Layout
  */
-
 public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder> {
 
     private ArrayList<Topic> mTopics;
@@ -40,9 +39,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-
         View topicView = inflater.inflate(R.layout.subject, parent, false);
-
         ViewHolder viewHolder = new ViewHolder(topicView);
 
         return viewHolder;
@@ -61,6 +58,9 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder
         return mTopics.size();
     }
 
+    /**
+     * View Holder for each Topic.
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.subject_button)
         Button subjectButton;

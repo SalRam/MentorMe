@@ -37,12 +37,10 @@ public class MentorInfoActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.go_home:
-            {
                 Intent intent = new Intent(this, HomeActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 return true;
-            }
             default:
                 return false;
         }

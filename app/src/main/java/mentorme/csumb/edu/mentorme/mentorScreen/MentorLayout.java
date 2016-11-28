@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import mentorme.csumb.edu.mentorme.R;
 import mentorme.csumb.edu.mentorme.data.model.mentors.Mentors;
-import mentorme.csumb.edu.mentorme.mentorScreen.mentorsLyoutAdapter.MentorsAdapter;
+import mentorme.csumb.edu.mentorme.mentorScreen.mentorsLayoutAdapter.MentorsAdapter;
 import rx.Subscriber;
 
 /**

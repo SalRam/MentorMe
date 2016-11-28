@@ -17,7 +17,7 @@ import rx.Subscriber;
 /**
  * Contains the functionality for the results that need to be displayed
  */
-class LoginLayout extends Subscriber<GoogleSignInResult>{
+class LoginLayout extends Subscriber<GoogleSignInResult> {
 
     private static final String TAG = "SignInActivity";
 
@@ -26,15 +26,13 @@ class LoginLayout extends Subscriber<GoogleSignInResult>{
 
     private AppCompatActivity mActivity;
     private ProgressDialog mProgressDialog;
-
     private Listener mListener;
 
     LoginLayout(AppCompatActivity activity, Listener listener){
         mActivity = activity;
-        mActivity.setContentView(R.layout.login);
-
         mListener = listener;
         ButterKnife.bind(this, mActivity);
+        mActivity.setContentView(R.layout.login);
     }
 
     @Override

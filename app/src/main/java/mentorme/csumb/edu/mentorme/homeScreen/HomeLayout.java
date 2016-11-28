@@ -41,19 +41,18 @@ public class HomeLayout extends Subscriber<Subjects> {
     HomeLayout(HomeActivity activity, HomeLayoutListener listener) {
 
         mActivity = activity;
-        mActivity.setContentView(R.layout.app_main_layout);
-
         mHomeListener = listener;
-
-        ButterKnife.bind(this, mActivity);
-        mToolbarTitle.setText("Subjects");
-        mActivity.setSupportActionBar(mToolbar);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 mActivity, mDrawer, mToolbar, R.string.open, R.string.close);
         mDrawer.addDrawerListener(toggle);
-        toggle.syncState();
 
+        ButterKnife.bind(this, mActivity);
+
+        mActivity.setContentView(R.layout.app_main_layout);
+        toggle.syncState();
+        mToolbarTitle.setText(R.string.subjects);
+        mActivity.setSupportActionBar(mToolbar);
         mNavigationView.setNavigationItemSelectedListener(new NavigationMenu(mActivity));
     }
     @OnClick(R.id.nav_view)
@@ -68,8 +67,8 @@ public class HomeLayout extends Subscriber<Subjects> {
     public void onError(Throwable e) {
         Log.d(TAG, e.getMessage());
         mNetworkErrorLayout.setVisibility(View.VISIBLE);
-
     }
+
     @Override
     public void onNext(Subjects subjects) {
 

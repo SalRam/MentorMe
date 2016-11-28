@@ -31,6 +31,13 @@ public class HomeController implements HomeLayout.HomeLayoutListener {
     @Override
     public void onNavigationMenuClick() { }
 
+    /**
+     * Runs when Menu item is selected.
+     *
+     * @param item The Item selected.
+     *
+     * @return {@true} if item is found. {@false} otherwise.
+     */
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add_mentor:

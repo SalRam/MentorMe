@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -23,6 +24,8 @@ import mentorme.csumb.edu.mentorme.profileScreen.ProfileActivity;
  */
 
 public class NavigationMenu implements NavigationView.OnNavigationItemSelectedListener {
+
+    private static String TAG = "NavigationMenu";
 
     private HomeActivity mActivity;
     @BindView(R.id.drawer_layout) DrawerLayout mDrawerLayout;
@@ -43,7 +46,7 @@ public class NavigationMenu implements NavigationView.OnNavigationItemSelectedLi
                 signOut();
                 break;
             default:
-                Toast.makeText(mActivity.getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "Invalid option");
                 break;
         }
 

@@ -1,4 +1,4 @@
-package mentorme.csumb.edu.mentorme.mentorScreen.mentorsLyoutAdapter;
+package mentorme.csumb.edu.mentorme.mentorScreen.mentorsLayoutAdapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -61,11 +61,13 @@ public class MentorsAdapter extends RecyclerView.Adapter<MentorsAdapter.ViewHold
         return mContext;
     }
 
+    /**
+     * View Holder for a mentor.
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
-        @BindView(R.id.subject_button)
-        Button subjectButton;
         private final Context context;
+        @BindView(R.id.subject_button) Button subjectButton;
 
         public ViewHolder(View itemView) {
             super(itemView);
