@@ -76,9 +76,6 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder
         public void onButtonClick(Button button) {
             Intent intent = new Intent(context, MentorActivity.class);
             context.startActivity(intent);
-
-            //Toast.makeText(context, button.getText(), Toast.LENGTH_SHORT).show();
-            Log.d("View Holder", button.getText().toString());
         }
     }
 }

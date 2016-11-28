@@ -5,9 +5,8 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- * Created by Donkey on 11/16/16.
+ * Controller for the {@link MentorActivity}.
  */
-
 public class MentorController implements MentorLayout.MentorLayoutListener{
 
     private MentorActivity mActivity;
