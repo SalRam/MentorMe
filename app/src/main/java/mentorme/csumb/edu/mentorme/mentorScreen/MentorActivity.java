@@ -5,9 +5,8 @@ import android.os.Bundle;
 import mentorme.csumb.edu.mentorme.mentorMe.MentorMeActivity;
 
 /**
- * Created by Donkey on 11/16/16.
+ * Activity class for the Mentors screen.
  */
-
 public class MentorActivity  extends MentorMeActivity{
 
     private MentorController mMentorController;
