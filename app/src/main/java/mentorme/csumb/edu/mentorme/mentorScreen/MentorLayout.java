@@ -3,6 +3,8 @@ package mentorme.csumb.edu.mentorme.mentorScreen;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,29 +21,20 @@ import rx.Subscriber;
  * Handles user Interface for Mentors.
  */
 
-public class MentorLayout extends Subscriber<Mentors>{
-
+public class MentorLayout extends Subscriber<Mentors> {
 
     private final String TAG = "MentorLayout";
-
     private MentorActivity mActivity;
-    private MentorLayoutListener mListener;
 
-    @BindView(R.id.recycler_view)
-    RecyclerView mRecyclerView;
-    @BindView(R.id.toolbar_no_menu)
-    Toolbar mToolbar;
-    @BindView(R.id.toolbar_title)
-    TextView mToolbarTitle;
-    @BindView(R.id.toolbar_back_arrow)
-    ImageView mBackArrow;
-    @BindView(R.id.network_error_layout)
-    LinearLayout mNetworkErrorLayout;
+    @BindView(R.id.toolbar_back_arrow) ImageView mBackArrow;
+    @BindView(R.id.network_error_layout) LinearLayout mNetworkErrorLayout;
+    @BindView(R.id.recycler_view) RecyclerView mRecyclerView;
+    @BindView(R.id.toolbar_no_menu) Toolbar mToolbar;
+    @BindView(R.id.toolbar_title) TextView mToolbarTitle;
 
-    public MentorLayout(MentorActivity activity, MentorController listener) {
+    public MentorLayout(MentorActivity activity) {
 
         mActivity = activity;
-        mListener = (MentorLayoutListener) (MentorLayoutListener) listener;
 
         mActivity.setContentView(R.layout.topics_layout);
 
@@ -49,22 +42,20 @@ public class MentorLayout extends Subscriber<Mentors>{
 
         mToolbarTitle.setText(R.string.mentors);
         mActivity.setSupportActionBar(mToolbar);
-
-
     }
+
     @OnClick(R.id.toolbar_back_arrow)
     public void onBackArrowClicked() {
         mActivity.onBackPressed();
     }
 
     @Override
-    public void onCompleted() {
-
-    }
+    public void onCompleted() { }
 
     @Override
     public void onError(Throwable e) {
-
+        Log.d(TAG, e.getMessage());
+        mNetworkErrorLayout.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -76,10 +67,5 @@ public class MentorLayout extends Subscriber<Mentors>{
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity.getApplicationContext()));
         mRecyclerView.setAdapter(adapter);
-
-    }
-
-    public interface MentorLayoutListener {
-        void onNavigationMenuClick();
     }
 }

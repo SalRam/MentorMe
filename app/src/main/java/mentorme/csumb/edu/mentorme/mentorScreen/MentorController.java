@@ -7,7 +7,7 @@ import rx.schedulers.Schedulers;
 /**
  * Controller for the {@link MentorActivity}.
  */
-public class MentorController implements MentorLayout.MentorLayoutListener{
+public class MentorController {
 
     private MentorActivity mActivity;
     private MentorLayout mMentorLayout;
@@ -15,7 +15,7 @@ public class MentorController implements MentorLayout.MentorLayoutListener{
     public MentorController(MentorActivity activity) {
 
         mActivity = activity;
-        mMentorLayout = new MentorLayout(mActivity, this);
+        mMentorLayout = new MentorLayout(mActivity);
 
         onAttach();
     }
@@ -26,8 +26,4 @@ public class MentorController implements MentorLayout.MentorLayoutListener{
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(mMentorLayout);
     }
-
-
-    @Override
-    public void onNavigationMenuClick() { }
 }
