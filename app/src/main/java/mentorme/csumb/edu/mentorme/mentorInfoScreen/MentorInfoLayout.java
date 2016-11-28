@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import mentorme.csumb.edu.mentorme.R;
 import mentorme.csumb.edu.mentorme.data.model.mentorInfo.MentorInfo;
 import rx.Subscriber;
@@ -40,6 +41,11 @@ public class MentorInfoLayout extends Subscriber<MentorInfo> {
         ButterKnife.bind(this, mActivity);
         mToolbarTitle.setText(R.string.mentor_info);
         mActivity.setSupportActionBar(mToolbar);
+    }
+
+    @OnClick(R.id.toolbar_back_arrow)
+    public void onBackArrowClicked() {
+        mActivity.onBackPressed();
     }
 
     @Override

@@ -1,13 +1,7 @@
 package mentorme.csumb.edu.mentorme.profileScreen;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.widget.TextView;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import mentorme.csumb.edu.mentorme.R;
+import android.support.v7.app.AppCompatActivity;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -19,4 +13,5 @@ public class ProfileActivity extends AppCompatActivity {
 
         mProfileController = new ProfileController(this);
     }
+
 }
