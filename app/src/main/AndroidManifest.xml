@@ -11,6 +11,7 @@
 
     <application
         android:allowBackup="true"
+        android:name=".MentorMeApp"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/empty_string"
         android:supportsRtl="true"
