@@ -65,7 +65,7 @@ public class HomeController implements HomeLayout.HomeLayoutListener {
      */
     @PerController
     @Component(dependencies = NetComponent.class, modules = HomeControllerModule.class)
-    public interface HomeComponent {
+    interface HomeComponent {
         void inject(HomeController homeController);
     }
 
@@ -74,7 +74,7 @@ public class HomeController implements HomeLayout.HomeLayoutListener {
      * Provides a {@link HomeLayout}
      */
     @Module
-    class HomeControllerModule {
+    static class HomeControllerModule {
         private final HomeActivity mActivity;
         private final HomeLayout.HomeLayoutListener mListener;
 
