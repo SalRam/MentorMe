@@ -1,9 +1,7 @@
 package mentorme.csumb.edu.mentorme.topicScreen.topicsLayoutAdapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +14,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import mentorme.csumb.edu.mentorme.R;
 import mentorme.csumb.edu.mentorme.data.model.topics.Topic;
-import mentorme.csumb.edu.mentorme.mentorScreen.MentorActivity;
 
 /**
  * Created by benitosanchez on 11/13/16.
@@ -26,10 +23,16 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder
 
     private ArrayList<Topic> mTopics;
     private Context mContext;
+    private TopicsViewHolderListener mListener;
 
-    public TopicsAdapter(Context context, ArrayList<Topic> topics) {
+    public TopicsAdapter(
+            Context context,
+            ArrayList<Topic> topics,
+            TopicsViewHolderListener listener) {
+
         mContext = context;
         mTopics = topics;
+        mListener = listener;
     }
 
     public Context getContext() {
@@ -43,7 +46,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder
 
         View topicView = inflater.inflate(R.layout.subject, parent, false);
 
-        ViewHolder viewHolder = new ViewHolder(topicView);
+        ViewHolder viewHolder = new ViewHolder(topicView, mListener);
 
         return viewHolder;
     }
@@ -62,20 +65,26 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.subject_button)
-        Button subjectButton;
-        private final Context context;
+        @BindView(R.id.subject_button) Button subjectButton;
+        private TopicsViewHolderListener mListener;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView, TopicsViewHolderListener listener) {
             super(itemView);
-            context = itemView.getContext();
+            mListener = listener;
+
             ButterKnife.bind(this, itemView);
         }
 
         @OnClick(R.id.subject_button)
-        public void onButtonClick(Button button) {
-            Intent intent = new Intent(context, MentorActivity.class);
-            context.startActivity(intent);
+        public void onButtonClick() {
+            mListener.onButtonClicked(getAdapterPosition());
         }
+    }
+
+    /**
+     * Interface listener that provides button position.
+     */
+    public interface TopicsViewHolderListener {
+        void onButtonClicked(int position);
     }
 }

@@ -1,5 +1,7 @@
 package mentorme.csumb.edu.mentorme.homeScreen;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -11,19 +13,25 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import mentorme.csumb.edu.mentorme.R;
+import mentorme.csumb.edu.mentorme.data.model.subjects.Subject;
 import mentorme.csumb.edu.mentorme.data.model.subjects.Subjects;
 import mentorme.csumb.edu.mentorme.homeScreen.homeLayoutAdapter.SubjectsAdapter;
+import mentorme.csumb.edu.mentorme.topicScreen.TopicActivity;
 import rx.Subscriber;
 
 /**
  * Contains the functionality for the result that need to be displayed
  */
 
-public class HomeLayout extends Subscriber<Subjects> {
+public class HomeLayout extends Subscriber<Subjects> implements SubjectsAdapter.ViewHolderListener {
 
     private final String TAG = "HomeLayout";
 
@@ -37,6 +45,7 @@ public class HomeLayout extends Subscriber<Subjects> {
     @BindView(R.id.network_error_layout) LinearLayout mNetworkErrorLayout;
 
     private HomeLayoutListener mHomeListener;
+    private ArrayList<Subject> mSubjects;
 
     HomeLayout(HomeActivity activity, HomeLayoutListener listener) {
 
@@ -72,14 +81,26 @@ public class HomeLayout extends Subscriber<Subjects> {
     }
     @Override
     public void onNext(Subjects subjects) {
+        mSubjects = subjects.getSubjects();
 
         SubjectsAdapter adapter = new SubjectsAdapter(
                 mActivity.getApplicationContext(),
-                subjects.getSubjects());
+                mSubjects,
+                this);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity.getApplicationContext()));
         mRecyclerView.setAdapter(adapter);
     }
+
+    @Override
+    public void onButtonClicked(int position) {
+        Intent intent = new Intent(mActivity.getApplicationContext(), TopicActivity.class);
+        Subject subject = mSubjects.get(position);
+        intent.putExtra("subjectId",subject.getId());
+
+        mActivity.startActivity(intent);
+    }
+
     /**
      * Listener for the {@link HomeLayout}
      */

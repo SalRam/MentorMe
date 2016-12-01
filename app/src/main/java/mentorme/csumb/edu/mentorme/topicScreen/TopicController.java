@@ -1,5 +1,7 @@
 package mentorme.csumb.edu.mentorme.topicScreen;
 
+import android.os.Bundle;
+
 import javax.inject.Inject;
 
 import dagger.Component;
@@ -16,7 +18,7 @@ import rx.schedulers.Schedulers;
 /**
  * Class to control the UI logic for {@link TopicActivity}
  */
-public class TopicController implements TopicLayout.TopicLayoutListener {
+class TopicController {
 
     private TopicActivity mActivity;
 
@@ -28,7 +30,7 @@ public class TopicController implements TopicLayout.TopicLayoutListener {
 
         DaggerTopicController_TopicControllerComponent.builder()
                 .netComponent(((MentorMeApp) mActivity.getApplicationContext()).getNetComponent())
-                .topicControllerModule(new TopicControllerModule(mActivity, this))
+                .topicControllerModule(new TopicControllerModule(mActivity))
                 .build()
                 .inject(this);
 
@@ -36,14 +38,17 @@ public class TopicController implements TopicLayout.TopicLayoutListener {
     }
 
     private void onAttach() {
-        mRetrofit.create(MentorMeApi.class).getTopics()
+        String subjectId = "";
+        Bundle bundle = mActivity.getIntent().getExtras();
+        if (bundle != null) {
+            subjectId = bundle.getString("subjectId");
+        }
+
+        mRetrofit.create(MentorMeApi.class).getTopics(subjectId)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(mTopicLayout);
     }
-
-    @Override
-    public void onNavigationMenuClick() { }
 
     /**
      * Component for {@link TopicController}
@@ -61,17 +66,15 @@ public class TopicController implements TopicLayout.TopicLayoutListener {
     @Module
     static class TopicControllerModule {
         private final TopicActivity mActivity;
-        private final TopicLayout.TopicLayoutListener mListener;
 
-        public TopicControllerModule(TopicActivity activity, TopicLayout.TopicLayoutListener listener) {
+        TopicControllerModule(TopicActivity activity) {
             mActivity = activity;
-            mListener = listener;
         }
 
         @Provides
         @PerController
         TopicLayout providesTopicLayout() {
-            return new TopicLayout(mActivity, mListener);
+            return new TopicLayout(mActivity);
         }
     }
 }

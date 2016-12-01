@@ -1,5 +1,6 @@
 package mentorme.csumb.edu.mentorme.homeScreen;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -30,8 +31,8 @@ public class HomeController implements HomeLayout.HomeLayoutListener {
 
     public HomeController(@NonNull HomeActivity activity) {
 
-
         mActivity = activity;
+
         DaggerHomeController_HomeComponent.builder()
                 .netComponent(((MentorMeApp) mActivity.getApplicationContext()).getNetComponent())
                 .homeControllerModule(new HomeControllerModule(mActivity, this))
