@@ -1,5 +1,8 @@
 package mentorme.csumb.edu.mentorme.mentorInfoScreen;
 
+import android.os.Bundle;
+import android.widget.Toast;
+
 import javax.inject.Inject;
 
 import dagger.Component;
@@ -36,7 +39,22 @@ public class MentorInfoController {
     }
 
     private void onAttach() {
-        mRetrofit.create(MentorMeApi.class).getMentorInformation()
+        String subjectId = "";
+        String topicId = "";
+        String mentorId = "";
+        Bundle bundle = mActivity.getIntent().getExtras();
+        if (bundle != null) {
+            subjectId = bundle.getString("subjectId");
+            topicId = bundle.getString("topicId");
+            mentorId = bundle.getString("mentorId");
+        }
+
+        Toast.makeText(mActivity.getApplicationContext(), subjectId, Toast.LENGTH_SHORT).show();
+        Toast.makeText(mActivity.getApplicationContext(), topicId, Toast.LENGTH_SHORT).show();
+        Toast.makeText(mActivity.getApplicationContext(), mentorId, Toast.LENGTH_SHORT).show();
+
+        mRetrofit.create(MentorMeApi.class)
+                .getMentorInformation(subjectId, topicId, mentorId)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(mMentorInfoLayout);

@@ -12,7 +12,7 @@ import mentorme.csumb.edu.mentorme.mentorMe.MentorMeActivity;
 /**
  * Activity class for the Mentors screen.
  */
-public class MentorActivity  extends MentorMeActivity{
+public class MentorActivity  extends MentorMeActivity {
 
     private MentorController mMentorController;
 

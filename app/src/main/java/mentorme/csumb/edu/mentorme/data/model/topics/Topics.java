@@ -10,9 +10,7 @@ import com.google.gson.annotations.SerializedName;
 @Generated("org.jsonschema2pojo")
 public class Topics {
 
-    @SerializedName("topics")
-    @Expose
-    private ArrayList<Topic> topics = new ArrayList<Topic>();
+    @SerializedName("topics") @Expose private ArrayList<Topic> topics = new ArrayList<Topic>();
 
     /**
      * 

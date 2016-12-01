@@ -2,8 +2,10 @@ package mentorme.csumb.edu.mentorme.homeScreen.homeLayoutAdapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.ActionProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,10 +25,12 @@ import mentorme.csumb.edu.mentorme.topicScreen.TopicActivity;
  * Subjects Adapter for the Recycler view.
  */
 
-public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.ViewHolder> {
+public class SubjectsAdapter
+        extends RecyclerView.Adapter<SubjectsAdapter.ViewHolder> {
 
     private ArrayList<Subject> mSubjects;
     private Context mContext;
+    private ViewHolderListener mListener;
 
     /**
      * Initialises Adapter
@@ -34,9 +38,10 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.ViewHo
      * @param context Context for the adater.
      * @param subjects A container of subjects to be displayed by the adapter.
      */
-    public SubjectsAdapter(Context context, ArrayList<Subject> subjects) {
+    public SubjectsAdapter(Context context, ArrayList<Subject> subjects, ViewHolderListener listener) {
         mContext = context;
         mSubjects = subjects;
+        mListener = listener;
     }
 
     public Context getContext() {
@@ -50,7 +55,7 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.ViewHo
 
         View contactView = inflater.inflate(R.layout.subject, parent, false);
 
-        ViewHolder viewHolder = new ViewHolder(contactView);
+        ViewHolder viewHolder = new ViewHolder(contactView, mListener);
 
         return viewHolder;
     }
@@ -79,26 +84,28 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.ViewHo
         return mSubjects.size();
     }
 
+
     /**
      * View holder.
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.subject_button) Button subjectButton;
-        private final Context context;
+        ViewHolderListener mListener;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView, ViewHolderListener listener) {
             super(itemView);
-            context = itemView.getContext();
+            mListener = listener;
+
             ButterKnife.bind(this, itemView);
         }
 
         @OnClick(R.id.subject_button)
-        public void onButtonClick(Button button) {
-            Intent intent = new Intent(context, TopicActivity.class);
-            context.startActivity(intent);
-
-            Toast.makeText(context, button.getText(), Toast.LENGTH_SHORT).show();
-            Log.d("View Holder", button.getText().toString());
+        public void onButtonClick() {
+            mListener.onButtonClicked(getAdapterPosition());
         }
+    }
+
+    public interface ViewHolderListener {
+        void onButtonClicked(int position);
     }
 }

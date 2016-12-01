@@ -8,12 +8,9 @@ import com.google.gson.annotations.SerializedName;
 @Generated("org.jsonschema2pojo")
 public class Topic {
 
-    @SerializedName("topic")
-    @Expose
-    private String topic;
-    @SerializedName("title")
-    @Expose
-    private String title;
+    @SerializedName("topic") @Expose private String topic;
+    @SerializedName("title") @Expose private String title;
+    @SerializedName("id") @Expose private String id;
 
     /**
      * 
@@ -51,4 +48,11 @@ public class Topic {
         this.title = title;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

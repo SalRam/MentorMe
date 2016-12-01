@@ -1,4 +1,4 @@
-package mentorme.csumb.edu.mentorme.data.model.subjects; ;
+package mentorme.csumb.edu.mentorme.data.model.subjects;
 
 import java.util.ArrayList;
 

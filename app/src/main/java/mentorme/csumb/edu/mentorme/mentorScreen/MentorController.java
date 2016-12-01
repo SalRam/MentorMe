@@ -1,6 +1,9 @@
 package mentorme.csumb.edu.mentorme.mentorScreen;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
+import android.widget.Toast;
 
 import javax.inject.Inject;
 
@@ -8,7 +11,9 @@ import dagger.Component;
 import dagger.Module;
 import dagger.Provides;
 import mentorme.csumb.edu.mentorme.MentorMeApp;
+import mentorme.csumb.edu.mentorme.R;
 import mentorme.csumb.edu.mentorme.data.component.NetComponent;
+import mentorme.csumb.edu.mentorme.data.model.topics.Topic;
 import mentorme.csumb.edu.mentorme.mentorMeApi.MentorMeApi;
 import mentorme.csumb.edu.mentorme.mentorMeApi.mentorMeImpl.Factory;
 import mentorme.csumb.edu.mentorme.util.PerController;
@@ -39,7 +44,15 @@ public class MentorController {
     }
 
     private void onAttach() {
-        mRetrofit.create(MentorMeApi.class).getMentors()
+        String subjectId = "";
+        String topicId = "";
+        Bundle bundle = mActivity.getIntent().getExtras();
+        if (bundle != null) {
+            subjectId = bundle.getString("subjectId");
+            topicId = bundle.getString("topicId");
+        }
+
+        mRetrofit.create(MentorMeApi.class).getMentors(subjectId, topicId)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(mMentorLayout);
