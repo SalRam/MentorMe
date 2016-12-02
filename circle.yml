@@ -17,12 +17,13 @@ test:
    override:
     - ./gradlew testDebug
     - ./gradlew assembleDebug
+    - ./gradlew jacocoTestReport
     - cp ./app/build/outputs/apk/app-debug.apk $CIRCLE_ARTIFACTS/
     - cp ./*/build/test-results/debug/*.xml $CIRCLE_TEST_REPORTS/
    post:
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
     - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
-    - bash <(curl -s https://codecov.io/bash)
+    - cd ./*/build/;bash <(curl -s https://codecov.io/bash)
 
 notify:
   webhooks:
