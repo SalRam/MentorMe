@@ -53,7 +53,7 @@ apply plugin: 'jacoco'
 
 task jacocoReport(type: JacocoReport) {
         reports {
-            xml.enabled false
+            xml.enabled true
             csv.enabled false
             html.destination "${buildDir}/reports/jacocoHtml"
         }
