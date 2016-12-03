@@ -22,6 +22,8 @@ import mentorme.csumb.edu.mentorme.data.model.topics.Topic;
 import mentorme.csumb.edu.mentorme.data.model.topics.Topics;
 import mentorme.csumb.edu.mentorme.mentorScreen.MentorActivity;
 import mentorme.csumb.edu.mentorme.topicScreen.topicsLayoutAdapter.TopicsAdapter;
+import mentorme.csumb.edu.mentorme.views.layout.toolbar.ToolbarSupport;
+import mentorme.csumb.edu.mentorme.views.layout.toolbar.backArrowToolbar.BackArrowToolbar;
 import rx.Subscriber;
 
 /**
@@ -35,26 +37,17 @@ class TopicLayout
 
     private TopicActivity mActivity;
     private ArrayList<Topic> mTopics;
+    private ToolbarSupport mToolbar;
 
     @BindView(R.id.recycler_view) RecyclerView mRecyclerView;
-    @BindView(R.id.toolbar_no_menu) Toolbar mToolbar;
-    @BindView(R.id.toolbar_title) TextView mToolbarTitle;
-    @BindView(R.id.toolbar_back_arrow) ImageView mBackArrow;
     @BindView(R.id.network_error_layout) LinearLayout mNetworkErrorLayout;
 
     TopicLayout(TopicActivity activity) {
         mActivity = activity;
         mActivity.setContentView(R.layout.topics_layout);
+        mToolbar = new BackArrowToolbar(mActivity, R.string.topics);
 
         ButterKnife.bind(this, mActivity);
-
-        mToolbarTitle.setText(R.string.topics);
-        mActivity.setSupportActionBar(mToolbar);
-    }
-
-    @OnClick(R.id.toolbar_back_arrow)
-    void onBackArrowClicked() {
-        mActivity.onBackPressed();
     }
 
     @Override

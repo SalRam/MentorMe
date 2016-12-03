@@ -24,6 +24,8 @@ import mentorme.csumb.edu.mentorme.data.model.mentors.Mentors;
 import mentorme.csumb.edu.mentorme.data.model.topics.Topic;
 import mentorme.csumb.edu.mentorme.mentorInfoScreen.MentorInfoActivity;
 import mentorme.csumb.edu.mentorme.mentorScreen.mentorsLyoutAdapter.MentorsAdapter;
+import mentorme.csumb.edu.mentorme.views.layout.toolbar.ToolbarSupport;
+import mentorme.csumb.edu.mentorme.views.layout.toolbar.backArrowToolbar.BackArrowToolbar;
 import rx.Subscriber;
 
 /**
@@ -35,12 +37,10 @@ public class MentorLayout extends Subscriber<Mentors> implements MentorsAdapter.
     private final String TAG = "MentorLayout";
     private MentorActivity mActivity;
     private ArrayList<Mentor> mMentors;
+    private ToolbarSupport mToolbar;
 
-    @BindView(R.id.toolbar_back_arrow) ImageView mBackArrow;
     @BindView(R.id.network_error_layout) LinearLayout mNetworkErrorLayout;
     @BindView(R.id.recycler_view) RecyclerView mRecyclerView;
-    @BindView(R.id.toolbar_no_menu) Toolbar mToolbar;
-    @BindView(R.id.toolbar_title) TextView mToolbarTitle;
 
     public MentorLayout(MentorActivity activity) {
 
@@ -50,13 +50,7 @@ public class MentorLayout extends Subscriber<Mentors> implements MentorsAdapter.
 
         ButterKnife.bind(this, mActivity);
 
-        mToolbarTitle.setText(R.string.mentors);
-        mActivity.setSupportActionBar(mToolbar);
-    }
-
-    @OnClick(R.id.toolbar_back_arrow)
-    public void onBackArrowClicked() {
-        mActivity.onBackPressed();
+        mToolbar = new BackArrowToolbar(mActivity, R.string.mentors);
     }
 
     @Override
