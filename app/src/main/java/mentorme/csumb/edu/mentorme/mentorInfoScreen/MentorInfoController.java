@@ -49,10 +49,6 @@ public class MentorInfoController {
             mentorId = bundle.getString("mentorId");
         }
 
-        Toast.makeText(mActivity.getApplicationContext(), subjectId, Toast.LENGTH_SHORT).show();
-        Toast.makeText(mActivity.getApplicationContext(), topicId, Toast.LENGTH_SHORT).show();
-        Toast.makeText(mActivity.getApplicationContext(), mentorId, Toast.LENGTH_SHORT).show();
-
         mRetrofit.create(MentorMeApi.class)
                 .getMentorInformation(subjectId, topicId, mentorId)
                 .subscribeOn(Schedulers.newThread())

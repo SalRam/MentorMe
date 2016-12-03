@@ -8,11 +8,12 @@ import android.view.MenuItem;
 
 import mentorme.csumb.edu.mentorme.R;
 import mentorme.csumb.edu.mentorme.homeScreen.HomeActivity;
+import mentorme.csumb.edu.mentorme.mentorMe.MentorMeActivity;
 
 /**
  * Activity for the Mentor's information screen.
  */
-public class MentorInfoActivity extends AppCompatActivity {
+public class MentorInfoActivity extends MentorMeActivity {
 
     private MentorInfoController mMentorInfoController;
 

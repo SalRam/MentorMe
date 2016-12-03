@@ -11,6 +11,8 @@ import butterknife.OnClick;
 import mentorme.csumb.edu.mentorme.R;
 import mentorme.csumb.edu.mentorme.user.local.User;
 import mentorme.csumb.edu.mentorme.user.local.UserLocalStorage;
+import mentorme.csumb.edu.mentorme.views.layout.toolbar.ToolbarSupport;
+import mentorme.csumb.edu.mentorme.views.layout.toolbar.backArrowToolbar.BackArrowToolbar;
 
 /**
  * Layout class for {@link ProfileActivity}
@@ -20,11 +22,10 @@ public class ProfileLayout {
 
     private static final String TAG = "ProfileLayout";
 
-    @BindView(R.id.toolbar_no_menu) Toolbar mToolbar;
-    @BindView(R.id.toolbar_title) TextView mToolbarTitle;
-    @BindView(R.id.toolbar_back_arrow) ImageView mBackArrow;
     @BindView(R.id.student_name) EditText mStudentDisplayName;
     @BindView(R.id.student_email) TextView mStudentEmail;
+
+    private ToolbarSupport mToolbar;
 
     private UserLocalStorage userLocalStorage;
 
@@ -36,8 +37,8 @@ public class ProfileLayout {
         mActivity.setContentView(R.layout.profile_layout);
 
         ButterKnife.bind(this, mActivity);
-        mToolbarTitle.setText("Profile");
-        mActivity.setSupportActionBar(mToolbar);
+
+        mToolbar = new BackArrowToolbar(mActivity, R.string.profile);
 
         userLocalStorage = new UserLocalStorage(mActivity);
 
@@ -49,11 +50,6 @@ public class ProfileLayout {
 
         mStudentDisplayName.setText(user.getDisplayName());
         mStudentEmail.setText(user.getEmail());
-    }
-
-    @OnClick(R.id.toolbar_back_arrow)
-    public void onBackArrowClicked() {
-        mActivity.onBackPressed();
     }
 }
 
