@@ -12,6 +12,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import mentorme.csumb.edu.mentorme.R;
 import mentorme.csumb.edu.mentorme.data.model.mentorInfo.MentorInfo;
+import mentorme.csumb.edu.mentorme.views.layout.toolbar.ToolbarSupport;
+import mentorme.csumb.edu.mentorme.views.layout.toolbar.backArrowToolbar.BackArrowToolbar;
 import rx.Subscriber;
 
 /**
@@ -23,9 +25,6 @@ public class MentorInfoLayout extends Subscriber<MentorInfo> {
 
     private MentorInfoActivity mActivity;
 
-    @BindView(R.id.toolbar_no_menu) Toolbar mToolbar;
-    @BindView(R.id.toolbar_title) TextView mToolbarTitle;
-    @BindView(R.id.toolbar_back_arrow) ImageView mBackArrow;
     @BindView(R.id.network_error_layout) LinearLayout mNetworkErrorLayout;
 
     @BindView(R.id.mentor_name) TextView mMentorName;
@@ -33,19 +32,15 @@ public class MentorInfoLayout extends Subscriber<MentorInfo> {
     @BindView(R.id.mentor_phone_number) TextView mMentorPhoneNumber;
     @BindView(R.id.mentor_description) TextView mMentorDescription;
 
+    private ToolbarSupport mToolbar;
+
     MentorInfoLayout(MentorInfoActivity activity) {
         mActivity = activity;
 
         mActivity.setContentView(R.layout.activity_mentor_info);
 
         ButterKnife.bind(this, mActivity);
-        mToolbarTitle.setText(R.string.mentor_info);
-        mActivity.setSupportActionBar(mToolbar);
-    }
-
-    @OnClick(R.id.toolbar_back_arrow)
-    public void onBackArrowClicked() {
-        mActivity.onBackPressed();
+        mToolbar = new BackArrowToolbar(mActivity, R.string.mentor_info);
     }
 
     @Override
