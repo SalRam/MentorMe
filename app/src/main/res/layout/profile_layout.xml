@@ -5,66 +5,62 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".topicScreen.TopicActivity"
+    tools:context=".profileScreen.ProfileActivity"
+    android:background="@color/lightBlue_0"
     android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+        android:layout_height="wrap_content">
 
         <include layout="@layout/toolbar_layout"/>
 
     </android.support.design.widget.AppBarLayout>
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:padding="20dp"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:inputType="none"
+            android:text="Name:" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/cardDialog"
-                android:padding="20dp"
-                android:textAlignment="center"
-                android:textSize="25sp"
-                android:inputType="none"
-                android:text="Name:" />
+        <EditText
+            android:id="@+id/student_name"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:inputType="none"
+            android:focusable="false"
+            android:layout_width="wrap_content"
+            android:layout_height="73dp" />
 
-            <EditText
-                android:id="@+id/student_name"
-                android:background="@color/cardDialog"
-                android:textAlignment="center"
-                android:textSize="25sp"
-                android:inputType="none"
-                android:focusable="false"
-                android:layout_width="wrap_content"
-                android:layout_height="73dp" />
+    </LinearLayout>
 
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:textSize="25sp"
+            android:textAlignment="center"
+            android:text="Email:" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="20dp"
-                android:textSize="25sp"
-                android:background="@color/cardDialog"
-                android:textAlignment="center"
-                android:text="Email:" />
+        <EditText
+            android:id="@+id/student_email"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:inputType="none"
+            android:focusable="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-            <EditText
-                android:id="@+id/student_email"
-                android:textAlignment="center"
-                android:textSize="25sp"
-                android:inputType="none"
-                android:focusable="false"
-                android:background="@color/cardDialog"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

@@ -18,7 +18,7 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".login.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
@@ -36,9 +36,10 @@
         <activity
             android:name=".topicScreen.TopicActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".profileScreen.ProfileActivity" />
+
         <activity android:name=".mentorScreen.MentorActivity" />
-        <activity android:name=".mentorInfoScreen.MentorInfoActivity"></activity>
+        <activity android:name=".profileScreen.ProfileActivity" />
+        <activity android:name=".mentorInfoScreen.MentorInfoActivity" />
     </application>
 
 </manifest>
