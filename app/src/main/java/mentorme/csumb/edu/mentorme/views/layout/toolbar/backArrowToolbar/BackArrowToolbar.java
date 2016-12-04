@@ -28,6 +28,7 @@ public class BackArrowToolbar implements ToolbarSupport {
         ButterKnife.bind(this, mActivity);
 
         mToolbarTitle.setText(titleId);
+        mToolbar.setTitle("");
         mActivity.setSupportActionBar(mToolbar);
     }
 
