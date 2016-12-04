@@ -13,7 +13,7 @@
         android:allowBackup="true"
         android:name=".MentorMeApp"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/empty_string"
+        android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity

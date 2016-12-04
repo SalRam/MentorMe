@@ -56,6 +56,7 @@ public class HomeLayout extends Subscriber<Subjects> implements SubjectsAdapter.
 
         ButterKnife.bind(this, mActivity);
         mToolbarTitle.setText("Subjects");
+        mToolbar.setTitle("");
         mActivity.setSupportActionBar(mToolbar);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
