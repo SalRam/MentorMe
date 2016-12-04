@@ -4,6 +4,6 @@
         android:id="@+id/add_mentor"
         app:showAsAction="ifRoom"
         android:title="Add"
-        android:icon="@android:drawable/ic_input_add">
+        android:icon="@drawable/add_button">
     </item>
 </menu>

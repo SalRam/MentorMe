@@ -56,7 +56,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder
         Topic topic = mTopics.get(position);
 
         Button button = holder.subjectButton;
-        button.setText(topic.getTopic() + "\n" + topic.getTitle());
+        button.setText(topic.getTitle() + "\n" + topic.getTopic());
     }
 
     @Override

@@ -61,6 +61,8 @@ public class HomeLayout extends Subscriber<Subjects> implements SubjectsAdapter.
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 mActivity, mDrawer, mToolbar, R.string.open, R.string.close);
         mDrawer.addDrawerListener(toggle);
+        mActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mActivity.getSupportActionBar().setHomeButtonEnabled(true);
         toggle.syncState();
 
         mNavigationView.setNavigationItemSelectedListener(new NavigationMenu(mActivity));
@@ -70,6 +72,7 @@ public class HomeLayout extends Subscriber<Subjects> implements SubjectsAdapter.
 
         mHomeListener.onNavigationMenuClick();
     }
+
     @Override
     public void onCompleted() { }
 

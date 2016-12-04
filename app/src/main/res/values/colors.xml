@@ -6,4 +6,22 @@
     <color name="statusBar">#E0E0E0</color>
     <color name="background">#EEEEEE</color>
     <color name="cardDialog">#FAFAFA</color>
+
+
+    <color name="lightBlue_0">#cbcde2</color>
+    <color name="lightBlue_1">#a8accf</color>
+    <color name="lightBlue_2">#8890be</color>
+
+    <color name="midBlue_0">#6d79a9</color>
+    <color name="midBlue_1">#576592</color>
+    <color name="midBlue_2">#415288</color>
+
+    <color name="darkBlue_0">#314373</color>
+    <color name="darkBlue_1">#203564</color>
+    <color name="darkBlue_2">#0a2b60</color>
+
+    <color name="darkBlue">#001e54</color>
+
+    <color name="lightGold_0">#ece9e0</color>
+
 </resources>
