@@ -56,7 +56,7 @@ public class SearchingForMentorTest {
         textView.check(matches(isDisplayed()));
 
         ViewInteraction appCompatButton3 = onView(
-                allOf(withId(R.id.subject_button), withText(" Survey of Organic Chem Lab\nCHEM 210"), isDisplayed()));
+                allOf(withId(R.id.subject_button), withText("CHEM 210\n Survey of Organic Chem Lab"), isDisplayed()));
         appCompatButton3.perform(click());
 
         ViewInteraction appCompatImageView = onView(
@@ -66,7 +66,7 @@ public class SearchingForMentorTest {
         appCompatImageView.perform(click());
 
         ViewInteraction appCompatButton4 = onView(
-                allOf(withId(R.id.subject_button), withText(" Survey of Organic Chem Lab\nCHEM 210"), isDisplayed()));
+                allOf(withId(R.id.subject_button), withText("CHEM 210\n Survey of Organic Chem Lab"), isDisplayed()));
         appCompatButton4.perform(click());
 
         ViewInteraction actionMenuItemView = onView(

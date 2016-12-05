@@ -1,13 +1,14 @@
 
 package mentorme.csumb.edu.mentorme.data.model.topics;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-@Generated("org.jsonschema2pojo")
+import java.util.ArrayList;
+
+/**
+ * Pojo object that holds Topics. 
+ */
 public class Topics {
 
     @SerializedName("topics") @Expose private ArrayList<Topic> topics = new ArrayList<Topic>();

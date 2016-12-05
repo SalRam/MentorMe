@@ -1,11 +1,12 @@
 
 package mentorme.csumb.edu.mentorme.data.model.topics;
 
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-@Generated("org.jsonschema2pojo")
+/**
+ * Pojo object that holds Topic values.
+ */
 public class Topic {
 
     @SerializedName("topic") @Expose private String topic;

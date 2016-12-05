@@ -6,9 +6,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-import javax.annotation.Generated;
-
-@Generated("org.jsonschema2pojo")
+/**
+ * Pojo object to hold Mentor values.
+ */
 public class Mentor {
 
     @SerializedName("id") @Expose private String id;
