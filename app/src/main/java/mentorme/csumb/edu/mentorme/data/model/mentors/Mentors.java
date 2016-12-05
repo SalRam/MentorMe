@@ -1,18 +1,13 @@
 package mentorme.csumb.edu.mentorme.data.model.mentors;
 
-        import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-import javax.annotation.Generated;
-
-@Generated("org.jsonschema2pojo")
 public class Mentors {
 
-    @SerializedName("mentors")
-    @Expose
-    private ArrayList<Mentor> mentors = new ArrayList<Mentor>();
+    @SerializedName("mentors") @Expose private ArrayList<Mentor> mentors = new ArrayList<Mentor>();
 
     /**
      *
