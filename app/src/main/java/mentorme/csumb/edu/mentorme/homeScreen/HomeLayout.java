@@ -8,8 +8,11 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -44,8 +47,12 @@ public class HomeLayout extends Subscriber<Subjects> implements SubjectsAdapter.
     @BindView(R.id.toolbar_title) TextView mToolbarTitle;
     @BindView(R.id.network_error_layout) LinearLayout mNetworkErrorLayout;
 
+    @BindView(R.id.search_text) EditText mSearchText;
+
     private HomeLayoutListener mHomeListener;
     private ArrayList<Subject> mSubjects;
+    private ArrayList<Subject> mFilteredList;
+    private SubjectsAdapter mAdapter;
 
     HomeLayout(HomeActivity activity, HomeLayoutListener listener) {
 
@@ -67,7 +74,20 @@ public class HomeLayout extends Subscriber<Subjects> implements SubjectsAdapter.
         toggle.syncState();
 
         mNavigationView.setNavigationItemSelectedListener(new NavigationMenu(mActivity));
+
     }
+
+    public void initList() {
+        mAdapter = new SubjectsAdapter(
+                mActivity.getApplicationContext(),
+                mSubjects,
+                this);
+
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity.getApplicationContext()));
+        mRecyclerView.setAdapter(mAdapter);
+
+    }
+
     @OnClick(R.id.nav_view)
     public void onNavigationMenuClick(){
 
@@ -86,20 +106,51 @@ public class HomeLayout extends Subscriber<Subjects> implements SubjectsAdapter.
     @Override
     public void onNext(Subjects subjects) {
         mSubjects = subjects.getSubjects();
+        initList();
 
-        SubjectsAdapter adapter = new SubjectsAdapter(
-                mActivity.getApplicationContext(),
-                mSubjects,
-                this);
+        mSearchText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                mSearchText.setCursorVisible(false);
+            }
 
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity.getApplicationContext()));
-        mRecyclerView.setAdapter(adapter);
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mSearchText.setCursorVisible(false);
+
+                s = s.toString().toLowerCase();
+
+
+                mFilteredList = new ArrayList<Subject>();
+
+                for (int i =0; i < mSubjects.size(); i++) {
+                    final String subjectTile = mSubjects.get(i).getSubject().toLowerCase();
+                    if (subjectTile.contains(s)) {
+                        mFilteredList.add(mSubjects.get(i));
+                    }
+                }
+
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity.getApplicationContext()));
+                mAdapter = new SubjectsAdapter(
+                        mActivity.getApplicationContext(),
+                        mFilteredList,
+                        HomeLayout.this);
+
+                mRecyclerView.setAdapter(mAdapter);
+                mAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                mSearchText.setCursorVisible(false);
+            }
+        });
     }
 
     @Override
     public void onButtonClicked(int position) {
         Intent intent = new Intent(mActivity.getApplicationContext(), TopicActivity.class);
-        Subject subject = mSubjects.get(position);
+        Subject subject = mFilteredList.get(position);
         intent.putExtra("subjectId",subject.getId());
 
         mActivity.startActivity(intent);
