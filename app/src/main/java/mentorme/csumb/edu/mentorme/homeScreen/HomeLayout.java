@@ -50,13 +50,16 @@ public class HomeLayout extends Subscriber<Subjects> implements SubjectsAdapter.
     @BindView(R.id.search_text) EditText mSearchText;
 
     private HomeLayoutListener mHomeListener;
+    private HomeController mController;
     private ArrayList<Subject> mSubjects;
     private ArrayList<Subject> mFilteredList;
     private SubjectsAdapter mAdapter;
 
-    HomeLayout(HomeActivity activity, HomeLayoutListener listener) {
+    HomeLayout(HomeActivity activity, HomeLayoutListener listener, HomeController controller) {
 
         mActivity = activity;
+
+        mController = controller;
         mActivity.setContentView(R.layout.app_main_layout);
 
         mHomeListener = listener;
@@ -81,6 +84,7 @@ public class HomeLayout extends Subscriber<Subjects> implements SubjectsAdapter.
      * Initializes adapter.
      */
     public void initList() {
+        mFilteredList = mSubjects;
         mAdapter = new SubjectsAdapter(
                 mActivity.getApplicationContext(),
                 mSubjects,
@@ -92,8 +96,7 @@ public class HomeLayout extends Subscriber<Subjects> implements SubjectsAdapter.
     }
 
     @OnClick(R.id.nav_view)
-    public void onNavigationMenuClick(){
-
+    void onNavigationMenuClick(){
         mHomeListener.onNavigationMenuClick();
     }
 
@@ -111,44 +114,22 @@ public class HomeLayout extends Subscriber<Subjects> implements SubjectsAdapter.
         mSubjects = subjects.getSubjects();
         initList();
 
-        mSearchText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                mSearchText.setCursorVisible(false);
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mSearchText.setCursorVisible(false);
-
-                s = s.toString().toLowerCase();
-
-
-                mFilteredList = new ArrayList<Subject>();
-
-                for (int i =0; i < mSubjects.size(); i++) {
-                    final String subjectTile = mSubjects.get(i).getSubject().toLowerCase();
-                    if (subjectTile.contains(s)) {
-                        mFilteredList.add(mSubjects.get(i));
-                    }
-                }
-
-                mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity.getApplicationContext()));
-                mAdapter = new SubjectsAdapter(
-                        mActivity.getApplicationContext(),
-                        mFilteredList,
-                        HomeLayout.this);
-
-                mRecyclerView.setAdapter(mAdapter);
-                mAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                mSearchText.setCursorVisible(false);
-            }
-        });
+        mSearchText.addTextChangedListener(mController);
     }
+
+    public void notifyTextChanged(ArrayList<Subject> filteredList) {
+        mFilteredList = filteredList;
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity.getApplicationContext()));
+        mAdapter = new SubjectsAdapter(
+                mActivity.getApplicationContext(),
+                filteredList,
+                HomeLayout.this);
+
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    public ArrayList<Subject> getSubjects() {return mSubjects;}
 
     @Override
     public void onButtonClicked(int position) {
