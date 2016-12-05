@@ -1,9 +1,8 @@
 package mentorme.csumb.edu.mentorme.homeScreen;
 
-import android.os.Bundle;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import javax.inject.Inject;
 
@@ -12,6 +11,7 @@ import dagger.Module;
 import dagger.Provides;
 import mentorme.csumb.edu.mentorme.MentorMeApp;
 import mentorme.csumb.edu.mentorme.R;
+import mentorme.csumb.edu.mentorme.addingMentor.AddingMentorActivity;
 import mentorme.csumb.edu.mentorme.data.component.NetComponent;
 import mentorme.csumb.edu.mentorme.mentorMeApi.MentorMeApi;
 import mentorme.csumb.edu.mentorme.util.PerController;
@@ -54,7 +54,9 @@ public class HomeController implements HomeLayout.HomeLayoutListener {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add_mentor:
-                Toast.makeText(mActivity.getApplicationContext(), "Add mentor", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mActivity, AddingMentorActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                mActivity.startActivity(intent);
                 return true;
             default:
                 return false;

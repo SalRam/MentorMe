@@ -40,6 +40,7 @@
         <activity android:name=".mentorScreen.MentorActivity" />
         <activity android:name=".profileScreen.ProfileActivity" />
         <activity android:name=".mentorInfoScreen.MentorInfoActivity" />
+        <activity android:name=".addingMentor.AddingMentorActivity" />
     </application>
 
 </manifest>
