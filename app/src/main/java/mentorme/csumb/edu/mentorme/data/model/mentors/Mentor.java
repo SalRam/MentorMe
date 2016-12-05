@@ -3,17 +3,13 @@ package mentorme.csumb.edu.mentorme.data.model.mentors;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import javax.annotation.Generated;
-
-@Generated("org.jsonschema2pojo")
+/**
+ * Pojo object to hold Mentor values.
+ */
 public class Mentor {
 
-    @SerializedName("id")
-    @Expose
-    private String id;
-    @SerializedName("name")
-    @Expose
-    private String name;
+    @SerializedName("id") @Expose private String id;
+    @SerializedName("name") @Expose private String name;
 
     /**
      *
