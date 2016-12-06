@@ -2,26 +2,20 @@ package mentorme.csumb.edu.mentorme.mentorScreen;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import mentorme.csumb.edu.mentorme.R;
 import mentorme.csumb.edu.mentorme.data.model.mentors.Mentor;
 import mentorme.csumb.edu.mentorme.data.model.mentors.Mentors;
-import mentorme.csumb.edu.mentorme.data.model.topics.Topic;
 import mentorme.csumb.edu.mentorme.mentorInfoScreen.MentorInfoActivity;
 import mentorme.csumb.edu.mentorme.mentorScreen.mentorsLyoutAdapter.MentorsAdapter;
 import mentorme.csumb.edu.mentorme.views.layout.toolbar.ToolbarSupport;
@@ -38,14 +32,19 @@ public class MentorLayout extends Subscriber<Mentors> implements MentorsAdapter.
     private MentorActivity mActivity;
     private ArrayList<Mentor> mMentors;
     private ToolbarSupport mToolbar;
+    private ArrayList<Mentor> mFilteredList;
+    private MentorsAdapter mAdapter;
+
+    private MentorController mController;
 
     @BindView(R.id.network_error_layout) LinearLayout mNetworkErrorLayout;
     @BindView(R.id.recycler_view) RecyclerView mRecyclerView;
+    @BindView(R.id.search_text) EditText mSearchText;
 
-    public MentorLayout(MentorActivity activity) {
+    public MentorLayout(MentorActivity activity, MentorController controller) {
 
         mActivity = activity;
-
+        mController = controller;
         mActivity.setContentView(R.layout.topics_layout);
 
         ButterKnife.bind(this, mActivity);
@@ -65,14 +64,10 @@ public class MentorLayout extends Subscriber<Mentors> implements MentorsAdapter.
     @Override
     public void onNext(Mentors mentors) {
         mMentors = mentors.getMentors();
+        mFilteredList = mMentors;
 
-        MentorsAdapter adapter = new MentorsAdapter(
-                mActivity.getApplicationContext(),
-                mMentors,
-                this);
-
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity.getApplicationContext()));
-        mRecyclerView.setAdapter(adapter);
+        initList();
+        mSearchText.addTextChangedListener(mController);
     }
 
     @Override
@@ -90,8 +85,37 @@ public class MentorLayout extends Subscriber<Mentors> implements MentorsAdapter.
 
         intent.putExtra("subjectId", subjectId);
         intent.putExtra("topicId", topicId);
-        intent.putExtra("mentorId", mMentors.get(position).getId());
+        intent.putExtra("mentorId", mFilteredList.get(position).getId());
 
         mActivity.startActivity(intent);
+    }
+
+    void notifyTextChanged(ArrayList<Mentor> filteredList) {
+        mFilteredList = filteredList;
+
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity.getApplicationContext()));
+        mAdapter = new MentorsAdapter(mActivity.getApplicationContext(),
+                mFilteredList,
+                this);
+
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * Returns a list of mentors.
+     */
+    public ArrayList<Mentor> getMentors() {
+        return mMentors;
+    }
+
+    private void initList() {
+        mAdapter = new MentorsAdapter(
+                mActivity.getApplicationContext(),
+                mMentors,
+                this);
+
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity.getApplicationContext()));
+        mRecyclerView.setAdapter(mAdapter);
     }
 }
