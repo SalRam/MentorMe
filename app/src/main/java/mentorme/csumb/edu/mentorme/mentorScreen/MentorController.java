@@ -2,8 +2,10 @@ package mentorme.csumb.edu.mentorme.mentorScreen;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
-import android.widget.Toast;
+import android.text.Editable;
+import android.text.TextWatcher;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -11,11 +13,9 @@ import dagger.Component;
 import dagger.Module;
 import dagger.Provides;
 import mentorme.csumb.edu.mentorme.MentorMeApp;
-import mentorme.csumb.edu.mentorme.R;
 import mentorme.csumb.edu.mentorme.data.component.NetComponent;
-import mentorme.csumb.edu.mentorme.data.model.topics.Topic;
+import mentorme.csumb.edu.mentorme.data.model.mentors.Mentor;
 import mentorme.csumb.edu.mentorme.mentorMeApi.MentorMeApi;
-import mentorme.csumb.edu.mentorme.mentorMeApi.mentorMeImpl.Factory;
 import mentorme.csumb.edu.mentorme.util.PerController;
 import retrofit2.Retrofit;
 import rx.android.schedulers.AndroidSchedulers;
@@ -24,9 +24,10 @@ import rx.schedulers.Schedulers;
 /**
  * Controller for the {@link MentorActivity}.
  */
-public class MentorController {
+public class MentorController implements TextWatcher {
 
     private MentorActivity mActivity;
+    private ArrayList<Mentor> mMentors;
     @Inject MentorLayout mMentorLayout;
     @Inject Retrofit mRetrofit;
 
@@ -36,7 +37,7 @@ public class MentorController {
 
         DaggerMentorController_MentorControllerComponent.builder()
                 .netComponent(((MentorMeApp) mActivity.getApplicationContext()).getNetComponent())
-                .mentorControllerModule(new MentorControllerModule(mActivity))
+                .mentorControllerModule(new MentorControllerModule(mActivity, this))
                 .build()
                 .inject(this);
 
@@ -58,6 +59,36 @@ public class MentorController {
                 .subscribe(mMentorLayout);
     }
 
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        String string  = s.toString().toLowerCase();
+        ArrayList<Mentor> mFilteredList = new ArrayList<>();
+
+        mMentors = mMentorLayout.getMentors();
+
+        if (!string.trim().isEmpty()) {
+            if (!mMentors.isEmpty() && mMentors != null) {
+
+                for (int i =0; i < mMentors.size(); i++) {
+                    final String mentor = mMentors.get(i).getName().toLowerCase();
+                    if (mentor.contains(s)) {
+                        mFilteredList.add(mMentors.get(i));
+                    }
+                }
+            }
+        } else {
+            mFilteredList = mMentors;
+        }
+
+        mMentorLayout.notifyTextChanged(mFilteredList);
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) { }
+
     /**
      * Component for {@link MentorController}
      */
@@ -73,15 +104,19 @@ public class MentorController {
     @Module
     static class MentorControllerModule {
         private final MentorActivity mActivity;
+        private final MentorController mController;
 
-        public MentorControllerModule(@NonNull MentorActivity activity) {
+        public MentorControllerModule(
+                @NonNull MentorActivity activity,
+                @NonNull MentorController controller) {
             mActivity = activity;
+            mController = controller;
         }
 
         @Provides
         @PerController
         MentorLayout providesMentorLayout() {
-            return new MentorLayout(mActivity);
+            return new MentorLayout(mActivity, mController);
         }
     }
 }

@@ -16,7 +16,7 @@ import mentorme.csumb.edu.mentorme.R;
 import mentorme.csumb.edu.mentorme.data.model.topics.Topic;
 
 /**
- * Created by benitosanchez on 11/13/16.
+ * Adapter for {@link TopicsViewHolderListener}
  */
 
 public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder> {
