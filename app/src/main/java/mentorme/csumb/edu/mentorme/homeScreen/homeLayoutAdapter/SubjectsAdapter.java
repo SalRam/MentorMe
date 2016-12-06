@@ -1,16 +1,11 @@
 package mentorme.csumb.edu.mentorme.homeScreen.homeLayoutAdapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.ActionProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -19,7 +14,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import mentorme.csumb.edu.mentorme.R;
 import mentorme.csumb.edu.mentorme.data.model.subjects.Subject;
-import mentorme.csumb.edu.mentorme.topicScreen.TopicActivity;
 
 /**
  * Subjects Adapter for the Recycler view.

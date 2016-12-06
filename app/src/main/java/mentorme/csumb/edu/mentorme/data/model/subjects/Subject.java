@@ -47,4 +47,14 @@ public class Subject {
         this.id = id;
     }
 
+    /**
+     * converts the endpoint data to string so that it can be diplayed
+     *
+     * @param
+     */
+
+    public String toString() {
+        return getSubject();
+    }
+
 }
